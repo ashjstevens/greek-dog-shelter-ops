@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kentavros Shelter</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --color-text-primary:#1a1a1a;--color-text-secondary:#666;
+  --color-text-info:#1a6fa8;--color-text-danger:#c0392b;--color-text-success:#1e7e34;--color-text-warning:#856404;
+  --color-background-primary:#fff;--color-background-secondary:#f5f5f5;--color-background-tertiary:#efefef;
+  --color-background-info:#e8f4fd;--color-background-danger:#fdecea;--color-background-success:#e8f5e9;--color-background-warning:#fff8e1;
+  --color-border-primary:rgba(0,0,0,0.4);--color-border-secondary:rgba(0,0,0,0.2);--color-border-tertiary:rgba(0,0,0,0.1);
+  --color-border-info:#90caf9;--color-border-danger:#ef9a9a;--color-border-success:#a5d6a7;--color-border-warning:#ffe082;
+  --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --border-radius-md:8px;--border-radius-lg:12px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --color-text-primary:#e8e8e8;--color-text-secondary:#aaa;
+  --color-text-info:#64b5f6;--color-text-danger:#ef9a9a;--color-text-success:#a5d6a7;--color-text-warning:#ffe082;
+  --color-background-primary:#1e1e1e;--color-background-secondary:#2a2a2a;--color-background-tertiary:#333;
+  --color-background-info:#0d2137;--color-background-danger:#2d1515;--color-background-success:#0d2117;--color-background-warning:#2d2000;
+  --color-border-primary:rgba(255,255,255,0.4);--color-border-secondary:rgba(255,255,255,0.2);--color-border-tertiary:rgba(255,255,255,0.1);
+}}
+body{font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary);background:var(--color-background-tertiary);min-height:100vh}
+.app{max-width:700px;margin:0 auto;padding:1rem}
+.nav{display:flex;gap:5px;margin-bottom:1.5rem;border-bottom:0.5px solid var(--color-border-tertiary);padding-bottom:1rem;flex-wrap:wrap}
+.nav button{padding:5px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:transparent;cursor:pointer;font-size:12px;color:var(--color-text-secondary)}
+.nav button.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:12px}
+.badge{display:inline-block;font-size:11px;padding:2px 7px;border-radius:var(--border-radius-md);margin:2px}
+.badge-danger{background:var(--color-background-danger);color:var(--color-text-danger)}
+.badge-warning{background:var(--color-background-warning);color:var(--color-text-warning)}
+.badge-info{background:var(--color-background-info);color:var(--color-text-info)}
+.badge-success{background:var(--color-background-success);color:var(--color-text-success)}
+.rag-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;flex-shrink:0;vertical-align:middle}
+.rag-green{background:#4caf50}.rag-amber{background:#ff9800}.rag-red{background:#f44336}
+input[type=text],input[type=number],select,textarea{width:100%;padding:6px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-size:13px;margin-bottom:8px}
+.btn{padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:transparent;cursor:pointer;font-size:13px;color:var(--color-text-primary)}
+.btn-primary{background:var(--color-background-info);color:var(--color-text-info);border-color:var(--color-border-info)}
+.btn-danger{background:var(--color-background-danger);color:var(--color-text-danger);border-color:var(--color-border-danger)}
+.btn-sm{padding:3px 8px;font-size:11px}
+.section-title{font-size:15px;font-weight:500;margin-bottom:1rem}
+.back-btn{background:transparent;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:13px;margin-bottom:1rem;padding:0;display:flex;align-items:center;gap:4px}
+.tab-content{display:none}.tab-content.active{display:block}
+label{font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:3px}
+.field-row{display:grid;grid-template-columns:130px 1fr;gap:8px;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px;align-items:start}
+.field-label{color:var(--color-text-secondary)}
+.note-item{padding:8px 12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:6px;font-size:13px}
+.note-date{font-size:11px;color:var(--color-text-secondary);margin-bottom:2px}
+.shift-header{font-size:12px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin:1.25rem 0 8px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.done-text{text-decoration:line-through;opacity:0.4}
+.check-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.check-row:last-child{border-bottom:none}
+.check-row input[type=checkbox]{width:16px;height:16px;margin-top:2px;cursor:pointer;flex-shrink:0}
+.rota-cell{width:28px;height:28px;border-radius:4px;border:0.5px solid var(--color-border-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px}
+.rota-on{background:var(--color-background-success);border-color:var(--color-border-success);color:var(--color-text-success)}
+.rota-off{background:var(--color-background-danger);border-color:var(--color-border-danger);color:var(--color-text-danger)}
+.inline-note-form{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px;margin-top:6px}
+.attribution{font-size:11px;color:var(--color-text-success);margin-top:2px}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);padding:1.25rem;width:100%;max-width:340px;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.modal h3{font-size:15px;font-weight:500;margin-bottom:1rem}
+.ai-output{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;font-size:13px;line-height:1.6;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="app">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+  <div>
+    <div style="font-size:18px;font-weight:500">Kentavros Shelter</div>
+    <div style="font-size:12px;color:var(--color-text-secondary)" id="today-date"></div>
+  </div>
+  <div id="shift-indicator" style="font-size:12px;padding:4px 10px;border-radius:var(--border-radius-md);background:var(--color-background-info);color:var(--color-text-info)"></div>
+</div>
+<div class="nav">
+  <button class="active" onclick="showTab('shift')"><i class="ti ti-calendar"></i> Shift</button>
+  <button onclick="showTab('dogs')"><i class="ti ti-paw"></i> Dogs</button>
+  <button onclick="showTab('volunteers')"><i class="ti ti-users"></i> Volunteers</button>
+  <button onclick="showTab('map')"><i class="ti ti-layout-grid"></i> Map</button>
+  <button onclick="showTab('rota')"><i class="ti ti-table"></i> Rota</button>
+  <button onclick="showTab('settings')"><i class="ti ti-settings"></i> Settings</button>
+</div>
+<div id="tab-shift" class="tab-content active"></div>
+<div id="tab-dogs" class="tab-content"></div>
+<div id="tab-volunteers" class="tab-content"></div>
+<div id="tab-map" class="tab-content"></div>
+<div id="tab-rota" class="tab-content"></div>
+<div id="tab-settings" class="tab-content"></div>
+</div>
+
+<!-- Attribution modal -->
+<div id="attr-modal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <h3 id="attr-modal-title">Who did this?</h3>
+    <select id="attr-vol-select" style="margin-bottom:12px"></select>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-primary" style="flex:1" onclick="confirmAttribution()">Confirm</button>
+      <button class="btn" onclick="cancelAttribution()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DAYS_WEEK=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const SHIFTS=['Morning','Evening'];
+const C=56,G=6;
+
+const DEFAULT_SETTINGS={
+  morningStart:'08:00',morningEnd:'11:00',
+  eveningStart:'17:00',eveningEnd:'20:00',
+  cleanMins:75,walkMins:20,feedMins:20,specialMins:30
+};
+
+// Storage
+const store={
+  get(k){try{const v=localStorage.getItem(k);return v?{value:v}:null;}catch(e){return null;}},
+  set(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+};
+
+const DEFAULT_DOGS=[
+{id:'undine',name:'Undine',gender:'F',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Shy, warms up slowly, gentle, sweet, food motivated',withDogs:'Good with puppies, curious and confident with adult dogs',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Anywhere, not too close to others'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'May be shy with new people but generally good and patient',leash:'Any',handling:'Very good, no pulling, enjoys walking next to you'},notes:'Found winter 2025 very thin with 8 puppies',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'adonis',name:'Adonis',gender:'M',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Slightly shy but warms quickly, gentle, friendly, cuddly',withDogs:'',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'On top of house, left side as you walk in'},meds:{what:'',how:''},walk:{harness:'Large',harnessing:'Excited, prefers harnessing on top of his house',leash:'Any',handling:'Very good, does not pull'},notes:'',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'sina',name:'Sina',gender:'F',enclosure:'',feedingShifts:'both',rag:'green',ragReason:'',withPeople:'Friendly, excited, sweet',withDogs:'Confident, comfortable, curious',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others - watch carefully',placement:'Entrance to house'},meds:{what:'Ear drops',how:'Squirt a few drops in both ears and massage.'},walk:{harness:'Medium',harnessing:'Excitable - wait for her to settle first',leash:'Any',handling:'Will pull very hard initially, bursts of energy.'},notes:'',adopted:false,archived:false,canWalk:true,tags:['Medication'],dogNotes:[]},
+{id:'spotty',name:'Spotty',gender:'M',enclosure:'',feedingShifts:'morning',rag:'red',ragReason:'Has bitten two volunteers. Needs slow trust building through fence.',withPeople:'Vocal, food-motivated, sweet, likes cuddles',withDogs:'Good with Sina, unsure with others',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others - watch',placement:'Entrance to house'},meds:{what:'',how:''},walk:{harness:'Large - harness training',harnessing:'Build familiarity first. Feed through fence first.',leash:'',handling:''},notes:'HAS BITTEN TWO VOLUNTEERS. Only enter if confident. Feed through fence first.',adopted:false,archived:false,canWalk:false,tags:['Biter','Caution'],dogNotes:[]},
+{id:'xenia',name:'Xenia',gender:'F',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Shy, warms slowly, sweet, gentle, enjoys cuddles, food motivated',withDogs:'Polite, shy, a little unsure',food:{type:'Half puppy half adult',amount:'1 cup',alone:'Alone outside due to Fenya',placement:'Harnessed, tethered, eats outside on grass'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Shy with new people - approach gently',leash:'Any',handling:'Very good, no pulling. Stubborn on way back - lift gently by harness.'},notes:'',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'fenya',name:'Fenya',gender:'F',enclosure:'',feedingShifts:'morning',rag:'amber',ragReason:'Needs 2 people to harness. Still building confidence.',withPeople:'Very vocal, shy, avoidant',withDogs:'Prefers own space but comfortable',food:{type:'Half puppy half adult',amount:'1 cup',alone:'Alone',placement:'Entrance to house'},meds:{what:'',how:''},walk:{harness:'Small',harnessing:'REQUIRES TWO PEOPLE. Guide slowly into house, partially lift roof. Attach lead, open door, step back.',leash:'Long',handling:'Does not pull but walks away from you.'},notes:'REQUIRES 2 PEOPLE to harness',adopted:false,archived:false,canWalk:true,tags:['Needs 2 people'],dogNotes:[]},
+{id:'zarah',name:'Zarah',gender:'F',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Shy at first, gentle, sweet, food motivated',withDogs:'Comfortable, polite, unfazed',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'In her own space'},meds:{what:'',how:''},walk:{harness:'Medium/Large',harnessing:'Approach slowly and gently, startles easily.',leash:'Any',handling:'Walks well, enjoys sniffing. Stubborn to return.'},notes:'',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'yamira',name:'Yamira',gender:'F',enclosure:'',feedingShifts:'both',rag:'amber',ragReason:'Harness training in progress. Needs patient daily practice.',withPeople:'Shy, curious, gentle, sensitive',withDogs:'Playful, observant, confident',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Between houses'},meds:{what:'',how:''},walk:{harness:'Harness training',harnessing:'Shy and avoidant with harness, needs patience and food',leash:'',handling:''},notes:'Harness training - not ready for walks.',adopted:false,archived:false,canWalk:false,tags:['Harness training'],dogNotes:[]},
+{id:'yoshi',name:'Yoshi',gender:'M',enclosure:'',feedingShifts:'both',rag:'green',ragReason:'',withPeople:'Friendly, sociable, energetic, food-motivated',withDogs:'Playful, confident, curious',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Entrance to house'},meds:{what:'',how:''},walk:{harness:'Large',harnessing:'Very excitable, prefers harnessing on top of house',leash:'Short',handling:'Very excitable at first, will pull. Settles and walks well.'},notes:'Do NOT walk with Yasin',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'kermit',name:'Kermit',gender:'M',enclosure:'',feedingShifts:'both',rag:'red',ragReason:'Very nervous. Hiding. Needs consistent gentle daily contact.',withPeople:'Nervous, shy, keeps distance.',withDogs:'',food:{type:'Puppy',amount:'2 cups shared with Wendolina',alone:'With Wendolina',placement:'Hand feeding'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Needs two people. Sit or lie down then harness.',leash:'',handling:''},notes:'Needs 2 people to harness. Shares food with Wendolina.',adopted:false,archived:false,canWalk:true,tags:['Needs 2 people'],dogNotes:[]},
+{id:'will',name:'Will',gender:'M',enclosure:'',feedingShifts:'both',rag:'red',ragReason:'Extremely shy. Rarely comes out. Needs daily human presence.',withPeople:'Very nervous and shy, hides in house.',withDogs:'',food:{type:'Puppy',amount:'1 cup',alone:'Alone',placement:'Hand feeding'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Move roof of house - he will come outside.',leash:'Any',handling:'Super nervous and tentative when walking'},notes:'Very shy - move roof to get him out',adopted:false,archived:false,canWalk:true,tags:['Shy'],dogNotes:[]},
+{id:'wendolina',name:'Wendolina',gender:'F',enclosure:'',feedingShifts:'both',rag:'green',ragReason:'',withPeople:'Social, excitable, will jump up for cuddles',withDogs:'Friendly but submissive.',food:{type:'Puppy',amount:'2 cups shared with Kermit',alone:'With Kermit',placement:'Hand feeding'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Easy - takes herself to fence/corner when she sees harness',leash:'Any',handling:'Walks well, either to your side or just in front'},notes:'Shares food with Kermit',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'willa',name:'Willa',gender:'F',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Shy at first, loves treats, opens up and enjoys gentle cuddles',withDogs:'Friendly, playful, curious but very submissive',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Entrance to house'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Shy and submissive. Can be avoidant - use treats.',leash:'Any',handling:'Good, lots of sniffing, no pulling. Very stubborn on way back.'},notes:'Loves to collect all food bowls and carry them',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'arion',name:'Arion',gender:'M',enclosure:'',feedingShifts:'morning',rag:'amber',ragReason:'Aggressive to some dogs. Needs careful management.',withPeople:'Food-motivated, enjoys attention and cuddles',withDogs:'Generally playful. Aggressive towards some dogs.',food:{type:'Half puppy half adult',amount:'1 cup',alone:'Alone and tethered',placement:'Where tethered'},meds:{what:'',how:''},walk:{harness:'Large',harnessing:'Very excited, will try to eat harness. ALWAYS leave through Bob and Billy enclosure. Close food door first.',leash:'Short',handling:'Will pull towards food area initially. Calmer once outside.'},notes:'ALWAYS exit through Bob/Billy enclosure. Close food door first. Tethered when eating.',adopted:false,archived:false,canWalk:true,tags:['Caution','Tethered feeding'],dogNotes:[]},
+{id:'theodora',name:'Theodora',gender:'F',enclosure:'',feedingShifts:'both',rag:'red',ragReason:'Leishmania and heartworm. Medication every shift, gentle handling.',withPeople:'Friendly, calm, enjoys cuddles',withDogs:'Nice, calm, curious',food:{type:'Purina blue bag + piece of meat with medicine',amount:'1 cup',alone:'Alone',placement:'Entrance to house'},meds:{what:'Leishmania + heartworm medication',how:'Morning and afternoon - follow instructions on her box'},walk:{harness:'Small',harnessing:'Easy - gently put her in it',leash:'Any',handling:'CARRY HER OUT of kennel, then very good and enjoys sniffing'},notes:'CARRY out of kennel. Leishmania, heartworms, low hematocrit.',adopted:false,archived:false,canWalk:true,tags:['Medical','Carry out'],dogNotes:[]},
+{id:'mira',name:'Mira',gender:'F',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'A bit anxious at first, loves treats, opens up and enjoys cuddles',withDogs:'Curious, playful, friendly',food:{type:'Half puppy half adult',amount:'1 cup',alone:'Take outside - Julio steals food',placement:'Outside'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Can be difficult - excited but anxious with new people.',leash:'Any',handling:'Will pull excitedly at first then settle.'},notes:"Julio steals her food - feed outside",adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'yasin',name:'Yasin',gender:'M',enclosure:'',feedingShifts:'both',rag:'green',ragReason:'',withPeople:'Friendly, curious, likes cuddles, food motivated',withDogs:'Excitable with familiar dogs. Hesitant with new dogs.',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:''},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Very excitable, jumps around.',leash:'SHORT - NO LONG LEASH',handling:'Will pull A LOT. Needs constant corrections.'},notes:'Do NOT walk with Yoshi.',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'happy',name:'Happy',gender:'F',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Very excited, playful, curious',withDogs:'Easy-going, curious',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'In front of her house'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Very excited - wait to settle',leash:'Any',handling:'Excited to go out, will pull. Stubborn going home.'},notes:'',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'oakley',name:'Oakley',gender:'M',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Very friendly, excited, jumps up for hugs',withDogs:'Friendly, playful, curious.',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Entrance to house'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Very excited, jumps up before calming',leash:'Any',handling:'Pulls very hard at start, settles quickly'},notes:'',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'julio',name:'Julio',gender:'M',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Excited, will jump up, very food oriented, loves cuddles',withDogs:'Calm, curious, polite',food:{type:'Half puppy half adult',amount:'1 cup',alone:'Alone',placement:'Outside'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Excited but will stand patiently - easy',leash:'Any',handling:'Will pull initially, easy-going once outside'},notes:"Do not let him eat Mira's food",adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'lio',name:'Lio',gender:'M',enclosure:'',feedingShifts:'morning',rag:'amber',ragReason:'Aggressive to puppies and some male dogs.',withPeople:'Excitable, friendly, playful, food motivated',withDogs:'Aggressive to Venjo, Arion and puppies.',food:{type:'Half puppy half adult',amount:'1 cup',alone:'Alone, tethered',placement:'Where tethered'},meds:{what:'',how:''},walk:{harness:'Small/Medium',harnessing:'Can be difficult, very excitable',leash:'Any',handling:'Initially excited but settles.'},notes:'Tethered when eating. Aggressive to puppies and some large male dogs.',adopted:false,archived:false,canWalk:true,tags:['Tethered feeding','Caution'],dogNotes:[]},
+{id:'levis',name:'Levis',gender:'M',enclosure:'',feedingShifts:'both',rag:'amber',ragReason:'Leishmaniasis medication ongoing. Needs monitoring.',withPeople:'Friendly, affectionate, excitable.',withDogs:'Aggressive to puppies and unknown male dogs.',food:{type:'Half puppy half adult',amount:'1 cup',alone:'Alone and tethered',placement:'Where tethered'},meds:{what:'Leishmaniasis medication',how:'Afternoon: 3/4 tablet in wet food'},walk:{harness:'Small/Medium',harnessing:'Very excitable, will jump up and run around',leash:'Any',handling:'Initially very excited and pulls. Settles quickly.'},notes:'Tethered when eating. Aggressive to puppies and unknown male dogs.',adopted:false,archived:false,canWalk:true,tags:['Medical','Tethered feeding'],dogNotes:[]},
+{id:'bob',name:'Bob',gender:'M',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Shy with strangers, wary of men.',withDogs:'Sometimes dominant, sociable',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Anywhere'},meds:{what:'',how:''},walk:{harness:'Medium to Large',harnessing:'More timid with new people and men. Prefers corner.',leash:'Normal',handling:'Will pull slightly. Stubborn going certain ways.'},notes:'More timid with men. Best with Billy.',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'billy',name:'Billy',gender:'M',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Shy with strangers, wary of men.',withDogs:'Curious, comfortable, can be confident',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Anywhere'},meds:{what:'',how:''},walk:{harness:'Medium to Large',harnessing:'More timid with new people and men.',leash:'Any',handling:'Initially very excited and pulls, settles quickly.'},notes:'More timid with men. Best with Bob.',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'xandra',name:'Xandra',gender:'F',enclosure:'',feedingShifts:'morning',rag:'amber',ragReason:'Post hip dysplasia op. Gentle exercise only.',withPeople:'Loves people, approaches cautiously then very affectionate',withDogs:'Gets on well with all dogs but very submissive',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Anywhere'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Easy, sometimes very excited',leash:'Any',handling:'Walks well, sniffs a lot. Very stubborn returning.'},notes:'Had hip dysplasia operation.',adopted:false,archived:false,canWalk:true,tags:['Post-op'],dogNotes:[]},
+{id:'vida',name:'Vida',gender:'F',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Very friendly, loves giving kisses',withDogs:'Selective - usually does not like female dogs',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Anywhere'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Prefers top of house, easy.',leash:'Any',handling:'Walks well. Very energetic, loves to run.'},notes:'Hops like a rabbit. No tail. Selective with female dogs.',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'oresti',name:'Oresti',gender:'M',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Shy at first, otherwise open, gentle, friendly',withDogs:'Friendly but assertive',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Anywhere'},meds:{what:'',how:''},walk:{harness:'Medium to Large',harnessing:'Sometimes unsure, prefers corner by door',leash:'Any',handling:'Going out door can be stressful. Stubborn outside - stay patient.'},notes:'Brother is Oscar.',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]},
+{id:'venjo',name:'Venjo',gender:'M',enclosure:'',feedingShifts:'morning',rag:'amber',ragReason:'Two hip dysplasia ops. Gentle walks only, no running.',withPeople:'Calm, sometimes cautious, incredibly gentle',withDogs:'Friendly, curious, playful.',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Anywhere'},meds:{what:'',how:''},walk:{harness:'Large',harnessing:'Comes when called, stays calm whilst you put harness on',leash:'Any',handling:'Can be excited on walk, likes to lead.'},notes:'TWO hip dysplasia operations - NO strenuous walks.',adopted:false,archived:false,canWalk:true,tags:['Post-op','Gentle walks only'],dogNotes:[]},
+{id:'nancy',name:'Nancy',gender:'F',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'',withDogs:'',food:{type:'',amount:'',alone:'',placement:''},meds:{what:'',how:''},walk:{harness:'',harnessing:'',leash:'',handling:''},notes:'',adopted:false,archived:false,canWalk:false,tags:[],dogNotes:[]},
+{id:'oscar',name:'Oscar',gender:'M',enclosure:'',feedingShifts:'morning',rag:'green',ragReason:'',withPeople:'Friendly, curious, playful',withDogs:'Gets on well with most dogs',food:{type:'Half puppy half adult',amount:'1 cup',alone:'With others',placement:'Anywhere'},meds:{what:'',how:''},walk:{harness:'Medium',harnessing:'Excited but manageable',leash:'Any',handling:'Pulls initially then settles'},notes:'Brother is Oresti.',adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]}
+];
+
+const DEFAULT_VOLUNTEERS=[
+{id:'v1',name:'Ash',offShifts:[]},{id:'v2',name:'Kay',offShifts:[]},{id:'v3',name:'Aimi',offShifts:[]},
+{id:'v4',name:'Marie',offShifts:[]},{id:'v5',name:'Victor',offShifts:[]},{id:'v6',name:'Romy',offShifts:[]},
+{id:'v7',name:'Anna',offShifts:[]},{id:'v8',name:'Nicolas',offShifts:[]}
+];
+
+let state={dogs:[],volunteers:[],shiftHistory:{},checkedTasks:{},taskAttribution:{},adHocTasks:{},shiftPlan:{},cleanHistory:{},specialAssignments:{},settings:{...DEFAULT_SETTINGS}};
+let currentDogId=null,showArchived=false;
+
+// Attribution modal state
+let attrCallback=null,attrKey=null;
+
+function loadState(){
+  const r=store.get('shelter-state');
+  if(r&&r.value){
+    try{
+      const s=JSON.parse(r.value);
+      state.dogs=s.dogs&&s.dogs.length?s.dogs:DEFAULT_DOGS;
+      state.volunteers=s.volunteers&&s.volunteers.length?s.volunteers:DEFAULT_VOLUNTEERS;
+      state.shiftHistory=s.shiftHistory||{};state.checkedTasks=s.checkedTasks||{};
+      state.taskAttribution=s.taskAttribution||{};
+      state.adHocTasks=s.adHocTasks||{};state.shiftPlan=s.shiftPlan||{};
+      state.cleanHistory=s.cleanHistory||{};state.specialAssignments=s.specialAssignments||{};
+      state.settings={...DEFAULT_SETTINGS,...(s.settings||{})};
+    }catch(e){state.dogs=DEFAULT_DOGS;state.volunteers=DEFAULT_VOLUNTEERS;}
+  }else{state.dogs=DEFAULT_DOGS;state.volunteers=DEFAULT_VOLUNTEERS;}
+  renderAll();
+}
+function saveState(){store.set('shelter-state',JSON.stringify(state));}
+
+// Helpers
+function today(){return new Date().toISOString().slice(0,10);}
+function todayDisplay(){return new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});}
+function currentShift(){return new Date().getHours()<14?'Morning':'Evening';}
+function shiftKey(){return today()+'-'+currentShift();}
+function prevShiftKey(){const s=currentShift();if(s==='Evening')return today()+'-Morning';const p=new Date();p.setDate(p.getDate()-1);return p.toISOString().slice(0,10)+'-Evening';}
+function getAvailableVols(shift){const dn=todayDayName();return state.volunteers.filter(v=>!(v.offShifts||[]).find(o=>o.day===dn&&o.shift===shift));}
+function daysSinceWalked(dog){const hist=(state.shiftHistory[dog.id]||[]).filter(h=>h.walked).sort((a,b)=>b.date.localeCompare(a.date));if(!hist.length)return 999;return Math.floor((new Date(today())-new Date(hist[0].date))/(1000*60*60*24));}
+function tagClass(t){if(['Biter','Caution'].includes(t))return'badge-danger';if(['Medication','Medical'].includes(t))return'badge-warning';if(['Needs 2 people','Carry out'].includes(t))return'badge-info';return'badge-success';}
+function ragDot(rag){return`<span class="rag-dot rag-${rag||'green'}"></span>`;}
+function volName(id){const v=state.volunteers.find(x=>x.id===id);return v?v.name:id;}
+function dogPhoto(d){if(d.photo)return`<div style="width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${d.photo}" style="width:100%;height:100%;object-fit:cover"></div>`;return`<div style="width:40px;height:40px;border-radius:50%;background:var(--color-background-info);display:flex;align-items:center;justify-content:center;font-weight:500;font-size:14px;color:var(--color-text-info);flex-shrink:0">${d.name[0]}</div>`;}
+function getWeekDates(){const now=new Date();const day=now.getDay();const mon=new Date(now);mon.setDate(now.getDate()-(day===0?6:day-1));return DAYS_WEEK.map((_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return d;});}
+function dayNameFromDate(d){return DAYS_WEEK[d.getDay()===0?6:d.getDay()-1];}
+function todayDayName(){return dayNameFromDate(new Date());}
+function isToday(d){const n=new Date();return d.getDate()===n.getDate()&&d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear();}
+function isPast(d){const n=new Date();n.setHours(0,0,0,0);return d<n;}
+function weekKey(){const d=new Date();const day=d.getDay();const mon=new Date(d);mon.setDate(d.getDate()-(day===0?6:day-1));return mon.toISOString().slice(0,10);}
+
+// Capacity calculation from settings
+function adHocMins(sk){
+  const tasks=state.adHocTasks[sk]||[];
+  return tasks.reduce((sum,t)=>sum+(t.mins||0),0);
+}
+function calcCapacity(vols,cleanerIds,sk){
+  const s=state.settings;
+  const shiftMins=180;
+  const extraMins=sk?adHocMins(sk):0;
+  const nonCleaners=vols.filter(v=>!cleanerIds.includes(v.id)).length;
+  const cleaners=cleanerIds.length;
+  const nonCleanerWalkMins=Math.max(0,shiftMins-s.feedMins-s.specialMins-extraMins);
+  const cleanerWalkMins=Math.max(0,shiftMins-s.cleanMins-s.specialMins-extraMins);
+  return Math.floor(nonCleanerWalkMins/s.walkMins)*nonCleaners+Math.floor(cleanerWalkMins/s.walkMins)*cleaners;
+}
+
+function pickCleaners(vols){
+  if(!vols.length)return[];if(vols.length===1)return[vols[0].id];
+  const prev=state.cleanHistory[prevShiftKey()]||[];
+  return[...vols.filter(v=>!prev.includes(v.id)),...vols.filter(v=>prev.includes(v.id))].slice(0,2).map(v=>v.id);
+}
+
+function buildSpecialAssignments(allVolIds){
+  const wk=weekKey();
+  if(state.specialAssignments[wk])return state.specialAssignments[wk];
+  const pool=[...state.dogs.filter(d=>!d.archived&&!d.adopted&&d.rag==='red'),...state.dogs.filter(d=>!d.archived&&!d.adopted&&d.rag==='amber')];
+  const assign={};let idx=0;
+  allVolIds.forEach(vid=>{assign[vid]=[];for(let i=0;i<2;i++){if(idx<pool.length){assign[vid].push(pool[idx].id);idx++;}}});
+  state.specialAssignments[wk]=assign;saveState();return assign;
+}
+
+function buildShiftPlan(vols,shift){
+  const s=state.settings;
+  const cleanerIds=pickCleaners(vols);
+  const cap=calcCapacity(vols,cleanerIds,sk);
+  const walkable=state.dogs.filter(d=>d.canWalk&&!d.adopted&&!d.archived).sort((a,b)=>daysSinceWalked(b)-daysSinceWalked(a)).slice(0,cap);
+  const feedDogs=state.dogs.filter(d=>!d.adopted&&!d.archived&&(shift==='Morning'||d.feedingShifts==='both'));
+  const medDogs=state.dogs.filter(d=>!d.adopted&&!d.archived&&d.meds&&d.meds.what&&d.meds.what.trim());
+  const nonWalkable=state.dogs.filter(d=>!d.canWalk&&!d.adopted&&!d.archived);
+  const specialAssign=buildSpecialAssignments(vols.map(v=>v.id));
+  return{
+    cleaners:cleanerIds,nonCleaners:vols.filter(v=>!cleanerIds.includes(v.id)).map(v=>v.id),
+    walkDogs:walkable.map(d=>({id:d.id,name:d.name,harness:d.walk.harness,handling:d.walk.handling,tags:d.tags||[],daysSince:daysSinceWalked(d)})),
+    feedDogs:feedDogs.map(d=>({id:d.id,name:d.name,amount:d.food.amount,type:d.food.type,alone:d.food.alone,placement:d.food.placement,tags:d.tags||[]})),
+    medDogs:medDogs.map(d=>({id:d.id,name:d.name,what:d.meds.what,how:d.meds.how})),
+    cuddles:nonWalkable.map(d=>({id:d.id,name:d.name,task:(d.tags||[]).includes('Harness training')?'Harness training':'Cuddles & socialisation'})),
+    specialAssign
+  };
+}
+
+// Attribution modal
+function showAttrModal(title,key,onConfirm){
+  const vols=getAvailableVols(currentShift());
+  const sel=document.getElementById('attr-vol-select');
+  sel.innerHTML=vols.map(v=>`<option value="${v.id}">${v.name}</option>`).join('');
+  document.getElementById('attr-modal-title').textContent=title;
+  document.getElementById('attr-modal').style.display='flex';
+  attrCallback=onConfirm;attrKey=key;
+}
+function confirmAttribution(){
+  const volId=document.getElementById('attr-vol-select').value;
+  document.getElementById('attr-modal').style.display='none';
+  if(attrCallback)attrCallback(volId);
+  attrCallback=null;attrKey=null;
+}
+function cancelAttribution(){
+  document.getElementById('attr-modal').style.display='none';
+  attrCallback=null;attrKey=null;
+}
+
+function getAttrib(sk,key){return(state.taskAttribution[sk]||{})[key]||null;}
+function setAttrib(sk,key,volId){if(!state.taskAttribution[sk])state.taskAttribution[sk]={};state.taskAttribution[sk][key]=volId;}
+
+// SHIFT
+function renderShift(){
+  const shift=currentShift(),vols=getAvailableVols(shift),sk=shiftKey();
+  const plan=state.shiftPlan[sk],adHoc=state.adHocTasks[sk]||[],checked=state.checkedTasks[sk]||{};
+  const s=state.settings,times=shift==='Morning'?`${s.morningStart}–${s.morningEnd}`:`${s.eveningStart}–${s.eveningEnd}`;
+
+  let html=`<div class="section-title" style="margin-bottom:2px">${shift} shift · ${times}</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:8px">${vols.length?vols.map(v=>v.name).join(', '):'No volunteers today'}</div>`;
+
+  // Ad hoc tasks — always visible
+  html+=`<div style="margin-bottom:1rem">
+    <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em">Ad hoc tasks</div>`;
+  // sort priority tasks first
+  const sortedAdHoc=adHoc.map((t,i)=>({...t,origIdx:i})).sort((a,b)=>(b.priority?1:0)-(a.priority?1:0));
+  sortedAdHoc.forEach(({origIdx:i,...task})=>{const key='adhoc-'+i;const done=checked[key];const attrib=getAttrib(sk,key);
+    html+=`<div style="display:flex;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary)">
+      <input type="checkbox" ${done?'checked':''} onchange="tickAdHoc(${i})" style="width:16px;height:16px;margin-top:2px;cursor:pointer;flex-shrink:0">
+      <div style="flex:1">
+        ${task.priority?`<span class="badge badge-danger" style="font-size:10px;padding:1px 5px;margin-right:4px">Priority</span>`:''}
+        <span class="${done?'done-text':''}" style="font-size:13px">${task.text}</span>
+        ${task.mins?`<span style="font-size:11px;color:var(--color-text-secondary)"> · ${task.mins} mins</span>`:''}
+        ${task.people>1?`<span style="font-size:11px;color:var(--color-text-secondary)"> · ${task.people} people</span>`:''}
+        ${task.assigned?`<span style="font-size:11px;color:var(--color-text-secondary)"> · ${volName(task.assigned)}</span>`:''}
+        ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="removeAdHoc(${i})">×</button>
+    </div>`;
+  });
+  html+=`<div style="margin-top:8px">
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
+      <input type="text" id="adhoc-text" placeholder="Task description..." style="margin:0;flex:2;min-width:140px">
+      <input type="number" id="adhoc-mins" placeholder="Mins" style="margin:0;width:58px">
+      <input type="number" id="adhoc-people" placeholder="People" style="margin:0;width:62px">
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px">
+      <label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--color-text-secondary);margin:0;cursor:pointer">
+        <input type="checkbox" id="adhoc-priority" style="width:14px;height:14px;margin:0"> Priority
+      </label>
+      <select id="adhoc-assign" style="margin:0;flex:1;font-size:12px;min-width:120px"><option value="">Assign to (optional)</option>${getAvailableVols(currentShift()).map(v=>'<option value="'+v.id+'">'+v.name+'</option>').join('')}</select>
+    </div>
+    <button class="btn btn-sm btn-primary" onclick="addAdHoc()">Add task</button>
+  </div></div>`;
+
+  if(!plan){
+    const previewCleaners=pickCleaners(vols);
+    const previewCap=calcCapacity(vols,previewCleaners,sk);
+    html+=`<div class="card" style="text-align:center;padding:1.5rem">
+      <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:4px">Ready to generate the shift plan</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">${vols.length} volunteers · ~${previewCap} walks capacity · last ${s.specialMins} mins special dogs${adHocMins(sk)>0?' · '+adHocMins(sk)+' mins ad hoc tasks reduce capacity':''}</div>
+      <button class="btn btn-primary" onclick="generatePlan()"><i class="ti ti-player-play"></i> Generate shift plan</button>
+    </div>`;
+  }else{
+    html+=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem">
+      <button class="btn btn-sm" onclick="generatePlan()"><i class="ti ti-refresh"></i> Regenerate</button>
+      <button class="btn btn-sm btn-primary" onclick="generateAIBriefing()"><i class="ti ti-sparkles"></i> AI briefing</button>
+    </div>`;
+
+    const nonCleanerNames=(plan.nonCleaners||[]).map(id=>volName(id)).join(', ')||'others';
+
+    // CLEANING
+    html+=`<div class="shift-header">Cleaning & water · ${plan.cleaners.map(id=>volName(id)).join(' + ')} · ${s.cleanMins} mins</div>`;
+    const cd=checked['cleaning'];const ca=getAttrib(sk,'cleaning');
+    html+=`<div class="check-row"><input type="checkbox" ${cd?'checked':''} onchange="tickTask('cleaning','Clean all kennels & refill water')" style="width:16px;height:16px;margin-top:2px;cursor:pointer;flex-shrink:0">
+      <div><div style="font-weight:500" class="${cd?'done-text':''}">Clean all kennels & refill water</div>
+      <div style="font-size:12px;color:var(--color-text-secondary)">${plan.cleaners.map(id=>volName(id)).join(' + ')} · ${s.cleanMins} mins</div>
+      ${ca?`<div class="attribution">✓ ${volName(ca)}</div>`:''}
+      </div></div>`;
+
+    // MEDS
+    if(plan.medDogs&&plan.medDogs.length){
+      html+=`<div class="shift-header">Medications · ${nonCleanerNames} · first ${s.feedMins} mins</div>`;
+      plan.medDogs.forEach(m=>{const key='med-'+m.id;const done=checked[key];const attrib=getAttrib(sk,key);
+        html+=`<div class="check-row"><input type="checkbox" ${done?'checked':''} onchange="tickTask('${key}','Med: ${m.name}')" style="width:16px;height:16px;margin-top:2px;cursor:pointer;flex-shrink:0">
+          <div><span style="font-weight:500" class="${done?'done-text':''}">${m.name}</span><span style="font-size:13px"> — ${m.what}</span>
+          <div style="font-size:12px;color:var(--color-text-secondary)">${m.how}</div>
+          ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
+          </div></div>`;
+      });
+    }
+
+    // FEEDING
+    html+=`<div class="shift-header">Feeding · ${plan.feedDogs.length} dogs · ${nonCleanerNames} · first ${s.feedMins} mins</div>`;
+    plan.feedDogs.forEach(d=>{const key='feed-'+d.id;const done=checked[key];const attrib=getAttrib(sk,key);
+      const warns=(d.tags||[]).filter(t=>['Biter','Caution','Tethered feeding'].includes(t));
+      html+=`<div class="check-row"><input type="checkbox" ${done?'checked':''} onchange="tickTask('${key}','Fed: ${d.name}')" style="width:16px;height:16px;margin-top:2px;cursor:pointer;flex-shrink:0">
+        <div><span style="font-weight:500" class="${done?'done-text':''}">${d.name}</span>${warns.map(w=>`<span class="badge ${tagClass(w)}">${w}</span>`).join('')}
+        <span style="font-size:12px;color:var(--color-text-secondary)"> · ${d.amount}${d.type?' · '+d.type:''}</span>
+        ${d.alone||d.placement?`<div style="font-size:12px;color:var(--color-text-secondary)">${[d.alone,d.placement].filter(Boolean).join(' · ')}</div>`:''}
+        ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
+        </div></div>`;
+    });
+
+    // WALKS
+    html+=`<div class="shift-header">Walks · ${plan.walkDogs.length} dogs · ${s.walkMins} mins each</div>`;
+    html+=`<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">${nonCleanerNames} walk from min ${s.feedMins}. ${plan.cleaners.map(id=>volName(id)).join(' + ')} join after min ${s.cleanMins}. Volunteers choose order.</div>`;
+    plan.walkDogs.forEach(d=>{const key='walk-'+d.id;const done=checked[key];const attrib=getAttrib(sk,key);
+      const warns=(d.tags||[]).filter(t=>['Caution','Needs 2 people','Carry out','Gentle walks only'].includes(t));
+      const daysText=d.daysSince===0?'today':d.daysSince===1?'yesterday':`${d.daysSince}d ago`;
+      html+=`<div class="check-row"><input type="checkbox" ${done?'checked':''} onchange="tickWalk('${d.id}')" style="width:16px;height:16px;margin-top:2px;cursor:pointer;flex-shrink:0">
+        <div style="flex:1">
+          <div class="${done?'done-text':''}"><span style="font-weight:500">${d.name}</span>${d.harness?`<span style="font-size:12px;color:var(--color-text-secondary)"> · ${d.harness}</span>`:''}${warns.map(w=>`<span class="badge ${tagClass(w)}">${w}</span>`).join('')}<span style="font-size:12px;color:var(--color-text-secondary)"> · ${daysText}</span></div>
+          ${d.handling?`<div style="font-size:12px;color:var(--color-text-secondary)">${d.handling}</div>`:''}
+          ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
+          <button class="btn btn-sm" style="margin-top:4px;font-size:11px" onclick="toggleInlineNote('${d.id}')"><i class="ti ti-pencil"></i> Note</button>
+          <div id="inline-note-${d.id}" style="display:none" class="inline-note-form">
+            <textarea id="inline-note-text-${d.id}" placeholder="Note about this walk..." rows="2" style="margin-bottom:6px;font-size:12px"></textarea>
+            <select id="inline-note-vol-${d.id}" style="margin-bottom:6px;font-size:12px">${getAvailableVols(currentShift()).map(v=>`<option value="${v.id}">${v.name}</option>`).join('')}</select>
+            <button class="btn btn-sm btn-primary" onclick="saveInlineNote('${d.id}')">Save note</button>
+          </div>
+        </div>
+      </div>`;
+    });
+
+    // CUDDLES
+    if(plan.cuddles&&plan.cuddles.length){
+      html+=`<div class="shift-header">Cuddles & harness training</div>`;
+      plan.cuddles.forEach(c=>{const key='cuddle-'+c.id;const done=checked[key];const attrib=getAttrib(sk,key);
+        html+=`<div class="check-row"><input type="checkbox" ${done?'checked':''} onchange="tickTask('${key}','${c.task}: ${c.name}')" style="width:16px;height:16px;margin-top:2px;cursor:pointer;flex-shrink:0">
+          <div><span style="font-weight:500" class="${done?'done-text':''}">${c.name}</span> — ${c.task}
+          ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
+          </div></div>`;
+      });
+    }
+
+    // SPECIAL DOGS
+    html+=`<div class="shift-header" style="border-color:var(--color-border-danger)"><span style="color:var(--color-text-danger)">Special dogs · everyone · last ${s.specialMins} mins</span></div>`;
+    html+=`<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">Sit, brush, train or walk. 2 per volunteer. <button class="btn btn-sm" onclick="showSpecialEditor()" style="margin-left:4px">Edit</button></div>`;
+    const wk=weekKey();const currentAssign=state.specialAssignments[wk]||plan.specialAssign||{};
+    vols.forEach(v=>{const dogIds=(currentAssign[v.id]||[]).filter(Boolean);if(!dogIds.length)return;
+      const key='special-'+v.id;const done=checked[key];const attrib=getAttrib(sk,key);
+      html+=`<div class="check-row"><input type="checkbox" ${done?'checked':''} onchange="tickTask('${key}','Special dogs: ${v.name}')" style="width:16px;height:16px;margin-top:2px;cursor:pointer;flex-shrink:0">
+        <div><span style="font-weight:500" class="${done?'done-text':''}">${v.name}</span> — ${dogIds.map(did=>{const dog=state.dogs.find(d=>d.id===did);if(!dog)return'';return`${ragDot(dog.rag)}<span style="font-weight:500">${dog.name}</span>${dog.ragReason?`<span style="font-size:12px;color:var(--color-text-secondary)"> (${dog.ragReason})</span>`:''}`}).join(' · ')}
+        ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
+        </div></div>`;
+    });
+    html+=`<div id="special-editor"></div><div id="ai-briefing-output" style="margin-top:1rem"></div>`;
+  }
+  document.getElementById('tab-shift').innerHTML=html;
+}
+
+function tickTask(key,label){
+  const sk=shiftKey();
+  const alreadyDone=(state.checkedTasks[sk]||{})[key];
+  if(alreadyDone){
+    // untick — remove
+    state.checkedTasks[sk][key]=false;
+    if(state.taskAttribution[sk])delete state.taskAttribution[sk][key];
+    saveState();renderShift();return;
+  }
+  showAttrModal(`Who did: ${label}?`,key,(volId)=>{
+    if(!state.checkedTasks[sk])state.checkedTasks[sk]={};
+    state.checkedTasks[sk][key]=true;
+    setAttrib(sk,key,volId);
+    saveState();renderShift();
+  });
+}
+
+function tickWalk(dogId){
+  const sk=shiftKey();const key='walk-'+dogId;
+  const alreadyDone=(state.checkedTasks[sk]||{})[key];
+  if(alreadyDone){
+    state.checkedTasks[sk][key]=false;
+    if(state.taskAttribution[sk])delete state.taskAttribution[sk][key];
+    // remove walk history entry for today
+    state.shiftHistory[dogId]=(state.shiftHistory[dogId]||[]).filter(h=>h.date!==today()||h.shift!==currentShift());
+    saveState();renderShift();return;
+  }
+  const dog=state.dogs.find(d=>d.id===dogId);
+  showAttrModal(`Who walked ${dog?dog.name:dogId}?`,key,(volId)=>{
+    if(!state.checkedTasks[sk])state.checkedTasks[sk]={};
+    state.checkedTasks[sk][key]=true;
+    setAttrib(sk,key,volId);
+    if(!state.shiftHistory[dogId])state.shiftHistory[dogId]=[];
+    state.shiftHistory[dogId].push({date:today(),walked:true,shift:currentShift(),by:volId});
+    saveState();renderShift();
+  });
+}
+
+function tickAdHoc(i){
+  const sk=shiftKey();const key='adhoc-'+i;
+  const alreadyDone=(state.checkedTasks[sk]||{})[key];
+  if(alreadyDone){
+    state.checkedTasks[sk][key]=false;
+    if(state.taskAttribution[sk])delete state.taskAttribution[sk][key];
+    saveState();renderShift();return;
+  }
+  const task=state.adHocTasks[sk][i];
+  showAttrModal(`Who did: ${task.text}?`,key,(volId)=>{
+    if(!state.checkedTasks[sk])state.checkedTasks[sk]={};
+    state.checkedTasks[sk][key]=true;
+    setAttrib(sk,key,volId);
+    saveState();renderShift();
+  });
+}
+
+function toggleInlineNote(dogId){
+  const el=document.getElementById('inline-note-'+dogId);
+  if(el)el.style.display=el.style.display==='none'?'block':'none';
+}
+
+function saveInlineNote(dogId){
+  const text=document.getElementById('inline-note-text-'+dogId).value.trim();
+  const volId=document.getElementById('inline-note-vol-'+dogId).value;
+  if(!text)return;
+  const d=state.dogs.find(x=>x.id===dogId);if(!d)return;
+  if(!d.dogNotes)d.dogNotes=[];
+  d.dogNotes.unshift({date:today(),shift:currentShift(),volunteer:volName(volId),text});
+  saveState();
+  document.getElementById('inline-note-'+dogId).style.display='none';
+  // show confirmation briefly
+  const btn=document.querySelector(`button[onclick="toggleInlineNote('${dogId}')"]`);
+  if(btn){const orig=btn.innerHTML;btn.innerHTML='✓ Saved';setTimeout(()=>{btn.innerHTML=orig;},1500);}
+}
+
+function addAdHoc(){
+  const text=document.getElementById('adhoc-text').value.trim();if(!text)return;
+  const mins=parseInt(document.getElementById('adhoc-mins').value)||0;
+  const people=parseInt(document.getElementById('adhoc-people').value)||1;
+  const priority=document.getElementById('adhoc-priority').checked;
+  const assignEl=document.getElementById('adhoc-assign');
+  const assigned=assignEl?assignEl.value:'';
+  const sk=shiftKey();
+  if(!state.adHocTasks[sk])state.adHocTasks[sk]=[];
+  state.adHocTasks[sk].push({text,mins:mins||null,people,priority,assigned});
+  // if plan exists and task has duration, prompt regenerate
+  if(state.shiftPlan[sk]&&mins>0){
+    if(confirm('This task takes '+mins+' mins and will affect walk capacity. Regenerate shift plan?')){
+      generatePlan();return;
+    }
+  }
+  saveState();renderShift();
+}
+
+function removeAdHoc(i){
+  const sk=shiftKey();state.adHocTasks[sk].splice(i,1);saveState();renderShift();
+}
+
+function generatePlan(){
+  const shift=currentShift(),vols=getAvailableVols(shift),sk=shiftKey();
+  const plan=buildShiftPlan(vols,shift);
+  state.shiftPlan[sk]=plan;state.cleanHistory[sk]=plan.cleaners;
+  saveState();renderShift();
+}
+
+function showSpecialEditor(){
+  const wk=weekKey();const plan=state.shiftPlan[shiftKey()];if(!plan)return;
+  const vols=getAvailableVols(currentShift());
+  const ragDogs=state.dogs.filter(d=>!d.archived&&!d.adopted&&(d.rag==='red'||d.rag==='amber'));
+  const current=state.specialAssignments[wk]||{};
+  let html=`<div class="card" style="margin-top:1rem"><div style="font-weight:500;margin-bottom:10px">Edit this week's special dog assignments</div>`;
+  vols.forEach(v=>{const assigned=current[v.id]||[];
+    html+=`<div style="margin-bottom:10px"><div style="font-size:13px;font-weight:500;margin-bottom:4px">${v.name}</div>`;
+    for(let i=0;i<2;i++){html+=`<select onchange="updateSpecialAssign('${v.id}',${i},this.value)" style="margin-bottom:4px"><option value="">— none —</option>${ragDogs.map(d=>`<option value="${d.id}" ${assigned[i]===d.id?'selected':''}>${d.rag==='red'?'🔴':'🟡'} ${d.name}${d.ragReason?' — '+d.ragReason:''}</option>`).join('')}</select>`;}
+    html+=`</div>`;
+  });
+  html+=`<button class="btn btn-sm btn-primary" onclick="document.getElementById('special-editor').innerHTML=''">Done</button></div>`;
+  document.getElementById('special-editor').innerHTML=html;
+}
+function updateSpecialAssign(vid,idx,dogId){const wk=weekKey();if(!state.specialAssignments[wk])state.specialAssignments[wk]={};if(!state.specialAssignments[wk][vid])state.specialAssignments[wk][vid]=[];state.specialAssignments[wk][vid][idx]=dogId;saveState();}
+
+async function generateAIBriefing(){
+  const el=document.getElementById('ai-briefing-output');if(!el)return;
+  el.innerHTML='<div style="font-size:13px;color:var(--color-text-secondary)">Generating...</div>';
+  const shift=currentShift(),vols=getAvailableVols(shift),plan=state.shiftPlan[shiftKey()],s=state.settings;
+  const times=shift==='Morning'?`${s.morningStart}–${s.morningEnd}`:`${s.eveningStart}–${s.eveningEnd}`;
+  const prompt=`Write a short, warm, practical shift briefing for Kentavros dog rescue shelter volunteers in Greece.\nShift: ${shift} (${times}), ${todayDisplay()}\nVolunteers: ${vols.map(v=>v.name).join(', ')||'None'}\nCleaners (${s.cleanMins} mins): ${plan?plan.cleaners.map(id=>volName(id)).join(' + '):'TBC'}\nNon-cleaners feed + medicate first ${s.feedMins} mins, then walk\nDogs to walk: ${plan?plan.walkDogs.length:0}\nMedications: ${plan&&plan.medDogs.length?plan.medDogs.map(d=>d.name+': '+d.what).join('; '):'None'}\nKey reminders: Fenya needs 2 people to harness. Theodora must be carried out of kennel. Arion must always exit through Bob/Billy enclosure. Spotty has bitten volunteers - feed through fence first.\n2-3 short paragraphs, practical and encouraging.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:prompt}]})});
+    const data=await r.json();
+    el.innerHTML=`<div class="ai-output">${data.content&&data.content[0]?data.content[0].text:'Could not generate.'}</div>`;
+  }catch(e){el.innerHTML=`<div style="color:var(--color-text-danger);font-size:13px">AI briefing requires a server environment.</div>`;}
+}
+
+// MAP
+const MC=56,MG=6;
+function renderMap(){
+  document.getElementById('tab-map').innerHTML=`<div class="section-title">Shelter map</div><div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">Click any enclosure to see who's inside.</div><div style="overflow-x:auto"><div style="position:relative" id="map-root"></div></div><div id="enc-detail"></div>`;
+  buildMap();
+}
+function buildMap(){
+  const root=document.getElementById('map-root');if(!root)return;
+  const col=i=>i*(MC+MG),y20=0,yMain=MC+MG,bigH=4*MC+3*MG,yBigBottom=yMain+bigH,yBottom=yMain+4*(MC+MG);
+  root.style.width=(8*MC+7*MG)+'px';root.style.height=(yBottom+MC)+'px';
+  function encDogs(n){return state.dogs.filter(d=>!d.archived&&String(d.enclosure)===String(n));}
+  function makeEl(num,x,y,w,h,isBig,z){
+    const ds=encDogs(num);const occ=ds.length>0;const div=document.createElement('div');
+    div.style.cssText=`position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px;border:1.5px solid ${occ?'var(--color-border-success)':'var(--color-border-secondary)'};border-radius:6px;background:${occ?'var(--color-background-success)':isBig?'var(--color-background-secondary)':'var(--color-background-primary)'};cursor:pointer;font-size:11px;overflow:hidden;display:flex;flex-direction:column;justify-content:${isBig&&!occ?'center':'flex-start'};align-items:${isBig&&!occ?'center':'flex-start'};padding:${isBig?'8px':'4px 5px'};z-index:${z||1}`;
+    div.innerHTML=isBig&&!occ?`<div style="font-size:22px;font-weight:500;color:var(--color-text-secondary)">${num}</div>`:`<div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:1px">${num}</div><div style="font-weight:500;word-break:break-word">${ds.map(d=>d.name).join(', ')}</div>`;
+    div.onclick=e=>{e.stopPropagation();showEncDetail(num);};div.onmouseover=()=>div.style.borderColor='var(--color-border-primary)';div.onmouseout=()=>div.style.borderColor=occ?'var(--color-border-success)':'var(--color-border-secondary)';root.appendChild(div);
+  }
+  const bigW=3*MC+2*MG,combinedW=bigW+MG+bigW;
+  makeEl(20,col(6),y20,MC,MC,false,1);makeEl(21,col(7),y20,MC,MC,false,1);
+  for(let i=0;i<4;i++)makeEl(i+1,col(0),yMain+i*(MC+MG),MC,MC,false,1);
+  makeEl(10,col(1),yMain,bigW,bigH,true,1);makeEl(19,col(4),yMain,bigW,bigH,true,1);
+  [18,17,16,15].forEach((n,i)=>makeEl(n,col(7),yMain+i*(MC+MG),MC,MC,false,1));
+  const yMid=yMain+(bigH-MC)/2;
+  makeEl(9,col(4)-MC,yMid,MC,MC,false,4);makeEl(11,col(4),yMid,MC,MC,false,4);
+  makeEl(8,col(1)+combinedW/2-MC/2,yBigBottom-MC,MC,MC,false,4);
+  ['5','6','7','Home','12','13','14'].forEach((n,i)=>makeEl(n,col(i),yBottom,MC,MC,false,1));
+  makeEl(14,col(7),yBottom,MC,MC,false,1);
+}
+function showEncDetail(num){
+  const dogs=state.dogs.filter(d=>!d.archived&&String(d.enclosure)===String(num));
+  let html=`<div class="card" style="margin-top:1rem"><div style="font-weight:500;margin-bottom:8px">Enclosure ${num}</div>`;
+  if(!dogs.length)html+=`<div style="font-size:13px;color:var(--color-text-secondary)">Empty</div>`;
+  dogs.forEach(d=>{html+=`<div style="margin-bottom:8px;padding-bottom:8px;border-bottom:0.5px solid var(--color-border-tertiary)"><div style="display:flex;align-items:center">${ragDot(d.rag)}<span style="font-weight:500">${d.name}</span></div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px">${d.withPeople||''}</div><div style="margin-top:3px">${(d.tags||[]).map(t=>`<span class="badge ${tagClass(t)}">${t}</span>`).join('')}</div>${d.notes?`<div style="margin-top:4px;font-size:12px;color:var(--color-text-warning)">${d.notes}</div>`:''}</div>`;});
+  html+=`</div>`;document.getElementById('enc-detail').innerHTML=html;
+}
+
+// DOGS
+function renderDogs(){
+  if(currentDogId){renderDogProfile(currentDogId);return;}
+  const active=state.dogs.filter(d=>!d.archived),arch=state.dogs.filter(d=>d.archived);
+  let html=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem"><div class="section-title" style="margin:0">Dogs (${active.length})</div><button class="btn btn-sm btn-primary" onclick="showAddDog()">+ Add</button></div><input type="text" placeholder="Search..." oninput="filterDogs(this.value)" style="margin-bottom:1rem"><div id="dog-list">`;
+  active.forEach(d=>{html+=dogCard(d);});html+=`</div>`;
+  if(arch.length){html+=`<div style="margin-top:1rem"><button class="btn btn-sm" onclick="toggleArchiveView()">${showArchived?'Hide':'Show'} archived (${arch.length})</button></div>`;if(showArchived){html+=`<div style="margin-top:8px">`;arch.forEach(d=>{html+=`<div class="card" style="opacity:0.55;padding:10px 1rem"><div style="display:flex;align-items:center;gap:10px">${dogPhoto(d)}<div style="flex:1"><span style="font-weight:500">${d.name}</span> <span class="badge badge-warning">Archived</span></div><button class="btn btn-sm" onclick="unarchiveDog('${d.id}')">Restore</button></div></div>`;});html+=`</div>`;}}
+  document.getElementById('tab-dogs').innerHTML=html;
+}
+function toggleArchiveView(){showArchived=!showArchived;renderDogs();}
+function dogCard(d){return`<div class="card" style="cursor:pointer;padding:10px 1rem" onclick="viewDog('${d.id}')"><div style="display:flex;align-items:center;gap:10px">${dogPhoto(d)}<div style="flex:1"><div style="display:flex;align-items:center;gap:4px">${ragDot(d.rag)}<span style="font-weight:500">${d.name}</span><span style="font-size:12px;color:var(--color-text-secondary)">${d.gender}</span>${d.adopted?' <span class="badge badge-info">Adopted</span>':''}${!d.canWalk?' <span class="badge badge-warning">No walks</span>':''}</div>${d.ragReason?`<div style="font-size:11px;color:var(--color-text-secondary);margin-top:1px">${d.ragReason}</div>`:''}<div>${(d.tags||[]).map(t=>`<span class="badge ${tagClass(t)}">${t}</span>`).join('')}</div></div><i class="ti ti-chevron-right" style="color:var(--color-text-secondary)"></i></div></div>`;}
+function filterDogs(q){document.getElementById('dog-list').innerHTML=state.dogs.filter(d=>!d.archived&&(d.name.toLowerCase().includes(q.toLowerCase())||(d.tags||[]).some(t=>t.toLowerCase().includes(q.toLowerCase())))).map(d=>dogCard(d)).join('');}
+function viewDog(id){currentDogId=id;renderDogProfile(id);}
+function renderDogProfile(id){
+  const d=state.dogs.find(x=>x.id===id);if(!d)return;
+  const days=daysSinceWalked(d);
+  let html=`<button class="back-btn" onclick="currentDogId=null;renderDogs()"><i class="ti ti-arrow-left"></i> All dogs</button>
+  <div class="card"><div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:1rem"><div style="position:relative">${dogPhoto(d)}<button class="btn btn-sm" onclick="uploadPhoto('${d.id}')" style="position:absolute;bottom:-8px;right:-8px;padding:2px 4px;font-size:10px"><i class="ti ti-camera"></i></button><input type="file" id="photo-input-${d.id}" accept="image/*" style="display:none" onchange="handlePhoto('${d.id}',this)"></div>
+  <div style="flex:1"><div style="font-size:17px;font-weight:500;display:flex;align-items:center;gap:6px">${ragDot(d.rag)}${d.name} <span style="font-size:13px;color:var(--color-text-secondary)">${d.gender==='F'?'Female':'Male'}</span></div>
+  <div style="margin-top:4px">${(d.tags||[]).map(t=>`<span class="badge ${tagClass(t)}">${t}</span>`).join('')}</div>
+  ${d.canWalk&&days<999?`<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Last walked: ${days===0?'today':days===1?'yesterday':days+' days ago'}</div>`:''}
+  </div></div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem">
+    <button class="btn btn-sm" onclick="toggleAdopted('${d.id}')">${d.adopted?'Mark as here':'Mark adopted'}</button>
+    <button class="btn btn-sm" onclick="toggleCanWalk('${d.id}')">${d.canWalk?'Mark no walks':'Mark can walk'}</button>
+    <button class="btn btn-sm btn-danger" onclick="archiveDog('${d.id}')">Archive</button>
+  </div>
+  <label>RAG status</label>
+  <div style="display:flex;gap:8px;margin-bottom:10px">${['green','amber','red'].map(r=>`<button onclick="setRag('${d.id}','${r}')" style="padding:4px 12px;border-radius:var(--border-radius-md);border:1.5px solid ${d.rag===r?'var(--color-border-primary)':'var(--color-border-secondary)'};background:${d.rag===r?'var(--color-background-secondary)':'transparent'};cursor:pointer;display:flex;align-items:center;gap:5px;font-size:13px"><span class="rag-dot rag-${r}"></span>${r}</button>`).join('')}</div>
+  <label>Reason (amber/red)</label>
+  <input type="text" value="${d.ragReason||''}" oninput="setRagReason('${d.id}',this.value)" placeholder="Why does this dog need attention?" style="margin-bottom:10px">`;
+  [['Feeding',d.feedingShifts==='both'?'Morning & evening':'Morning only'],['With people',d.withPeople],['With dogs',d.withDogs],['Food type',d.food.type],['Food amount',d.food.amount],['Feed alone?',d.food.alone],['Bowl placement',d.food.placement],['Medication',d.meds.what],['Med instructions',d.meds.how],['Harness size',d.walk.harness],['Harnessing',d.walk.harnessing],['Leash',d.walk.leash],['Walk handling',d.walk.handling]].forEach(([label,val])=>{if(!val)return;html+=`<div class="field-row"><div class="field-label">${label}</div><div>${val}</div></div>`;});
+  html+=`<label style="margin-top:10px">Feeding schedule</label><select onchange="setFeedingShift('${d.id}',this.value)" style="margin-bottom:8px"><option value="morning" ${d.feedingShifts==='morning'?'selected':''}>Morning only</option><option value="both" ${d.feedingShifts==='both'?'selected':''}>Morning & evening</option></select>
+  <label>Enclosure</label><select onchange="setEnclosure('${d.id}',this.value)"><option value="">Unassigned</option>${['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21'].map(n=>`<option value="${n}" ${d.enclosure==n?'selected':''}>${n}</option>`).join('')}</select>`;
+  if(d.notes)html+=`<div style="margin-top:10px;padding:10px;background:var(--color-background-warning);border-radius:var(--border-radius-md);font-size:13px;color:var(--color-text-warning)">${d.notes}</div>`;
+  html+=`</div><div class="card"><div style="font-weight:500;margin-bottom:10px">Volunteer notes</div>`;
+  (d.dogNotes||[]).forEach(n=>{html+=`<div class="note-item"><div class="note-date">${n.date}${n.shift?' · '+n.shift:''} · ${n.volunteer||'Volunteer'}</div>${n.text}</div>`;});
+  html+=`<textarea id="note-text" placeholder="Add a note..." rows="2" style="margin-top:8px"></textarea>
+  <select id="note-vol" style="margin-bottom:8px"><option value="">Select volunteer...</option>${state.volunteers.map(v=>`<option value="${v.name}">${v.name}</option>`).join('')}</select>
+  <button class="btn btn-sm btn-primary" onclick="addNote('${d.id}')">Add note</button></div>`;
+  document.getElementById('tab-dogs').innerHTML=html;
+}
+function uploadPhoto(id){document.getElementById('photo-input-'+id).click();}
+function handlePhoto(id,input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{const d=state.dogs.find(x=>x.id===id);d.photo=e.target.result;saveState();renderDogProfile(id);};reader.readAsDataURL(file);}
+function addNote(dogId){const text=document.getElementById('note-text').value.trim(),vol=document.getElementById('note-vol').value;if(!text)return;const d=state.dogs.find(x=>x.id===dogId);if(!d.dogNotes)d.dogNotes=[];d.dogNotes.unshift({date:today(),shift:currentShift(),volunteer:vol||'Volunteer',text});saveState();renderDogProfile(dogId);}
+function toggleAdopted(id){const d=state.dogs.find(x=>x.id===id);d.adopted=!d.adopted;saveState();renderDogProfile(id);}
+function toggleCanWalk(id){const d=state.dogs.find(x=>x.id===id);d.canWalk=!d.canWalk;saveState();renderDogProfile(id);}
+function archiveDog(id){if(!confirm('Archive this dog?'))return;const d=state.dogs.find(x=>x.id===id);d.archived=true;currentDogId=null;saveState();renderDogs();}
+function unarchiveDog(id){const d=state.dogs.find(x=>x.id===id);d.archived=false;saveState();renderDogs();}
+function setEnclosure(id,val){const d=state.dogs.find(x=>x.id===id);d.enclosure=val;saveState();}
+function setFeedingShift(id,val){const d=state.dogs.find(x=>x.id===id);d.feedingShifts=val;saveState();}
+function setRag(id,val){const d=state.dogs.find(x=>x.id===id);d.rag=val;saveState();renderDogProfile(id);}
+function setRagReason(id,val){const d=state.dogs.find(x=>x.id===id);d.ragReason=val;saveState();}
+function showAddDog(){
+  document.getElementById('tab-dogs').innerHTML=`<button class="back-btn" onclick="currentDogId=null;renderDogs()"><i class="ti ti-arrow-left"></i> All dogs</button>
+  <div class="card"><div class="section-title">Add new dog</div>
+    <label>Name</label><input type="text" id="new-name">
+    <label>Gender</label><select id="new-gender"><option value="M">Male</option><option value="F">Female</option></select>
+    <label>Feeding schedule</label><select id="new-feed-shift"><option value="morning">Morning only</option><option value="both">Morning & evening</option></select>
+    <label>RAG status</label><select id="new-rag"><option value="green">Green</option><option value="amber">Amber</option><option value="red">Red</option></select>
+    <label>Reason (amber/red)</label><input type="text" id="new-rag-reason">
+    <label>With people</label><textarea id="new-people" rows="2"></textarea>
+    <label>With other dogs</label><textarea id="new-dogs-txt" rows="2"></textarea>
+    <label>Harness size</label><input type="text" id="new-harness">
+    <label>Harnessing notes</label><textarea id="new-harnessing" rows="2"></textarea>
+    <label>Leash</label><input type="text" id="new-leash">
+    <label>Walk handling</label><textarea id="new-handling" rows="2"></textarea>
+    <label>Food type</label><input type="text" id="new-food-type">
+    <label>Food amount</label><input type="text" id="new-food-amount">
+    <label>Feed alone?</label><input type="text" id="new-food-alone">
+    <label>Bowl placement</label><input type="text" id="new-food-placement">
+    <label>Medication</label><input type="text" id="new-meds">
+    <label>Medication instructions</label><input type="text" id="new-meds-how">
+    <label>Additional notes</label><textarea id="new-notes" rows="2"></textarea>
+    <button class="btn btn-primary" onclick="addDog()" style="margin-top:8px">Add dog</button>
+  </div>`;
+}
+function addDog(){const name=document.getElementById('new-name').value.trim();if(!name)return;const id=name.toLowerCase().replace(/\s+/g,'-')+'-'+Date.now();state.dogs.push({id,name,gender:document.getElementById('new-gender').value,enclosure:'',photo:'',feedingShifts:document.getElementById('new-feed-shift').value,rag:document.getElementById('new-rag').value,ragReason:document.getElementById('new-rag-reason').value,withPeople:document.getElementById('new-people').value,withDogs:document.getElementById('new-dogs-txt').value,food:{type:document.getElementById('new-food-type').value,amount:document.getElementById('new-food-amount').value,alone:document.getElementById('new-food-alone').value,placement:document.getElementById('new-food-placement').value},meds:{what:document.getElementById('new-meds').value,how:document.getElementById('new-meds-how').value},walk:{harness:document.getElementById('new-harness').value,harnessing:document.getElementById('new-harnessing').value,leash:document.getElementById('new-leash').value,handling:document.getElementById('new-handling').value},notes:document.getElementById('new-notes').value,adopted:false,archived:false,canWalk:true,tags:[],dogNotes:[]});saveState();currentDogId=null;renderDogs();}
+
+// VOLUNTEERS
+function renderVolunteers(){
+  let html=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem"><div class="section-title" style="margin:0">Volunteers (${state.volunteers.length})</div><button class="btn btn-sm btn-primary" onclick="showAddVol()">+ Add</button></div><div id="vol-list">`;
+  state.volunteers.forEach(v=>{html+=`<div class="card"><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-weight:500">${v.name}</span><button class="btn btn-sm btn-danger" onclick="removeVol('${v.id}')">Remove</button></div></div>`;});
+  html+=`</div><div id="add-vol-form"></div>`;document.getElementById('tab-volunteers').innerHTML=html;
+}
+function showAddVol(){document.getElementById('add-vol-form').innerHTML=`<div class="card"><div style="font-weight:500;margin-bottom:8px">Add volunteer</div><input type="text" id="new-vol-name" placeholder="Name"><button class="btn btn-sm btn-primary" onclick="addVol()">Add</button></div>`;}
+function addVol(){const name=document.getElementById('new-vol-name').value.trim();if(!name)return;state.volunteers.push({id:'vol-'+Date.now(),name,offShifts:[]});saveState();renderVolunteers();}
+function removeVol(id){state.volunteers=state.volunteers.filter(v=>v.id!==id);saveState();renderVolunteers();}
+
+// ROTA
+function renderRota(){
+  const dates=getWeekDates(),todayStr=todayDayName();
+  let html=`<div class="section-title">Rota</div><div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">Tap any cell to toggle. Green = available, red = off.</div><div style="overflow-x:auto"><table style="border-collapse:separate;border-spacing:4px"><thead><tr><th style="min-width:72px"></th>`;
+  dates.forEach(d=>{const t=isToday(d);html+=`<th colspan="2" style="text-align:center;padding:2px 4px"><div style="font-size:11px;font-weight:${t?'500':'400'};color:var(--color-text-${t?'primary':'secondary'})">${d.toLocaleDateString('en-GB',{weekday:'short'})}</div><div style="font-size:10px;color:var(--color-text-${t?'info':'secondary'});font-weight:${t?'500':'400'}">${d.getDate()}/${d.getMonth()+1}</div></th>`;});
+  html+=`</tr><tr><th></th>`;dates.forEach(()=>SHIFTS.forEach(s=>{html+=`<th style="text-align:center;font-size:10px;color:var(--color-text-secondary);font-weight:400;padding:0 2px">${s[0]}</th>`;}));
+  html+=`</tr></thead><tbody>`;
+  state.volunteers.forEach(v=>{
+    html+=`<tr><td style="font-size:13px;font-weight:500;padding:2px 6px;white-space:nowrap">${v.name}</td>`;
+    dates.forEach(d=>{const dn=dayNameFromDate(d);const past=isPast(d);SHIFTS.forEach(shift=>{const off=(v.offShifts||[]).find(o=>o.day===dn&&o.shift===shift);html+=`<td style="padding:1px"><div class="rota-cell ${off?'rota-off':'rota-on'}" style="${past?'opacity:0.4;cursor:default':''}" ${past?'':'onclick="toggleRota(\''+v.id+'\',\''+dn+'\',\''+shift+'\')"'}>${off?'✕':'✓'}</div></td>`;});});
+    html+=`</tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  const morn=getAvailableVols('Morning'),eve=getAvailableVols('Evening');
+  html+=`<div class="card" style="margin-top:1rem"><div style="font-weight:500;margin-bottom:6px">Today · ${todayStr}</div><div style="font-size:13px"><strong>Morning:</strong> ${morn.map(v=>v.name).join(', ')||'None'}</div><div style="font-size:13px;margin-top:4px"><strong>Evening:</strong> ${eve.map(v=>v.name).join(', ')||'None'}</div></div>`;
+  document.getElementById('tab-rota').innerHTML=html;
+}
+function toggleRota(volId,day,shift){const v=state.volunteers.find(x=>x.id===volId);if(!v)return;if(!v.offShifts)v.offShifts=[];const idx=v.offShifts.findIndex(o=>o.day===day&&o.shift===shift);if(idx>=0)v.offShifts.splice(idx,1);else v.offShifts.push({day,shift});saveState();renderRota();}
+
+// SETTINGS
+function renderSettings(){
+  const s=state.settings;
+  document.getElementById('tab-settings').innerHTML=`<div class="section-title">Settings</div>
+  <div class="card"><div style="font-weight:500;margin-bottom:1rem">Shift times</div>
+    <label>Morning start</label><input type="text" id="s-ms" value="${s.morningStart}">
+    <label>Morning end</label><input type="text" id="s-me" value="${s.morningEnd}">
+    <label>Evening start</label><input type="text" id="s-es" value="${s.eveningStart}">
+    <label>Evening end</label><input type="text" id="s-ee" value="${s.eveningEnd}">
+  </div>
+  <div class="card"><div style="font-weight:500;margin-bottom:1rem">Task durations (mins)</div>
+    <label>Cleaning & water</label><input type="number" id="s-clean" value="${s.cleanMins}" min="10" max="180">
+    <label>Feed & medicate</label><input type="number" id="s-feed" value="${s.feedMins}" min="5" max="60">
+    <label>Walk per dog</label><input type="number" id="s-walk" value="${s.walkMins}" min="10" max="60">
+    <label>Special dogs</label><input type="number" id="s-special" value="${s.specialMins}" min="10" max="60">
+    <div id="capacity-preview" style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;margin-bottom:12px"></div>
+    <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+  </div>
+  <div class="card"><div style="font-weight:500;margin-bottom:6px">Shift breakdown</div>
+    <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.8">
+      Total shift: 3 hours<br>
+      Cleaners (${s.cleanMins} mins): clean & water · then walk until special dogs<br>
+      Non-cleaners: feed & medicate (${s.feedMins} mins) · then walk<br>
+      Everyone: special dogs · last ${s.specialMins} mins<br>
+      Walk capacity per non-cleaner: ${Math.floor((180-s.feedMins-s.specialMins)/s.walkMins)} dogs<br>
+      Walk capacity per cleaner: ${Math.floor(Math.max(0,180-s.cleanMins-s.specialMins)/s.walkMins)} dogs
+    </div>
+  </div>`;
+  // live preview on change
+  ['s-clean','s-feed','s-walk','s-special'].forEach(id=>{document.getElementById(id).oninput=updateCapacityPreview;});
+  updateCapacityPreview();
+}
+function updateCapacityPreview(){
+  const clean=parseInt(document.getElementById('s-clean').value)||75;
+  const feed=parseInt(document.getElementById('s-feed').value)||20;
+  const walk=parseInt(document.getElementById('s-walk').value)||20;
+  const special=parseInt(document.getElementById('s-special').value)||30;
+  const nonCleanerWalks=Math.floor((180-feed-special)/walk);
+  const cleanerWalks=Math.floor(Math.max(0,180-clean-special)/walk);
+  const el=document.getElementById('capacity-preview');
+  if(el)el.textContent=`With 8 volunteers: ${nonCleanerWalks*6} walks (non-cleaners) + ${cleanerWalks*2} walks (cleaners) = ${nonCleanerWalks*6+cleanerWalks*2} total`;
+}
+function saveSettings(){
+  state.settings={
+    morningStart:document.getElementById('s-ms').value||'08:00',morningEnd:document.getElementById('s-me').value||'11:00',
+    eveningStart:document.getElementById('s-es').value||'17:00',eveningEnd:document.getElementById('s-ee').value||'20:00',
+    cleanMins:parseInt(document.getElementById('s-clean').value)||75,
+    feedMins:parseInt(document.getElementById('s-feed').value)||20,
+    walkMins:parseInt(document.getElementById('s-walk').value)||20,
+    specialMins:parseInt(document.getElementById('s-special').value)||30
+  };
+  saveState();renderAll();renderSettings();
+}
+
+function showTab(tab){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.querySelectorAll('.nav button')[['shift','dogs','volunteers','map','rota','settings'].indexOf(tab)].classList.add('active');
+  if(tab==='shift')renderShift();else if(tab==='dogs'){currentDogId=null;renderDogs();}else if(tab==='volunteers')renderVolunteers();else if(tab==='map')renderMap();else if(tab==='rota')renderRota();else if(tab==='settings')renderSettings();
+}
+function renderAll(){document.getElementById('today-date').textContent=todayDisplay();document.getElementById('shift-indicator').textContent=currentShift()+' shift';renderShift();}
+loadState();
+</script>
+</body>
+</html>
