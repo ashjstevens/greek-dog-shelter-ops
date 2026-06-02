@@ -2,7 +2,7 @@
 
 A volunteer shift management tool built for a dog rescue shelter in Greece, based on a real operational problem I spotted while volunteering there.
 
-**[Live demo →](https://ashjstevens.github.io/dog-shelter)**
+**[Live demo →](https://ashjstevens.github.io/greek-dog-shelter-ops)**
 
 ## What it does
 
