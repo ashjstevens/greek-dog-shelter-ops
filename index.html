@@ -70,16 +70,77 @@ label{font-size:13px;color:var(--color-text-secondary);display:block;margin-bott
 .modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);padding:1.25rem;width:100%;max-width:340px;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
 .modal h3{font-size:15px;font-weight:500;margin-bottom:1rem}
 .ai-output{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:1rem;font-size:13px;line-height:1.6;white-space:pre-wrap}
+
+/* Sunshine Dogs-inspired theme: warm yellow, calm slate, soft surfaces */
+:root{
+  --sunshine:#fdc918;--sunshine-soft:#fff7d6;--sunshine-pale:#fffbea;--shelter-blue:#215387;
+  --color-text-primary:#1a202c;--color-text-secondary:#647080;
+  --color-text-info:#215387;--color-text-danger:#b83b35;--color-text-success:#26734d;--color-text-warning:#7a5a00;
+  --color-background-primary:#fff;--color-background-secondary:#f7fafc;--color-background-tertiary:#edf2f7;
+  --color-background-info:#eaf2fa;--color-background-danger:#fff0ee;--color-background-success:#edf8f2;--color-background-warning:#fff7d6;
+  --color-border-primary:#94a3b8;--color-border-secondary:#d4dde7;--color-border-tertiary:#e5ebf1;
+  --color-border-info:#b9d0e7;--color-border-danger:#efc4bf;--color-border-success:#bedfcd;--color-border-warning:#f2d875;
+  --border-radius-md:12px;--border-radius-lg:20px;
+  --shadow-soft:0 14px 34px rgba(32,49,67,.07);--shadow-lift:0 16px 38px rgba(32,49,67,.12);
+}
+@media(prefers-color-scheme:dark){:root{
+  --sunshine:#f7c83c;--sunshine-soft:#423817;--sunshine-pale:#302b1c;--shelter-blue:#8db7df;
+  --color-text-primary:#f4f7fa;--color-text-secondary:#aeb9c5;
+  --color-text-info:#9ac3e8;--color-text-danger:#f0a09a;--color-text-success:#91d4ad;--color-text-warning:#f5d878;
+  --color-background-primary:#202830;--color-background-secondary:#27323d;--color-background-tertiary:#172029;
+  --color-background-info:#20364a;--color-background-danger:#402725;--color-background-success:#203a2d;--color-background-warning:#3d341b;
+  --color-border-primary:#788899;--color-border-secondary:#465666;--color-border-tertiary:#344352;
+  --color-border-info:#456985;--color-border-danger:#80504c;--color-border-success:#456f58;--color-border-warning:#776327;
+  --shadow-soft:0 14px 34px rgba(0,0,0,.18);--shadow-lift:0 16px 38px rgba(0,0,0,.28);
+}}
+body{line-height:1.5;-webkit-font-smoothing:antialiased;position:relative}
+body:before{content:"";position:absolute;inset:0 0 auto;height:250px;background:linear-gradient(145deg,var(--sunshine-soft),var(--sunshine-pale) 72%);z-index:-1}
+.app{max-width:780px;padding:1.4rem 1rem 3rem}
+.app-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;padding:1.15rem 1.25rem;background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.72);border-radius:24px;box-shadow:var(--shadow-soft);backdrop-filter:blur(12px)}
+@media(prefers-color-scheme:dark){.app-header{background:rgba(32,40,48,.9);border-color:var(--color-border-tertiary)}}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--sunshine);color:#1a202c;font-size:23px;box-shadow:0 8px 20px rgba(253,201,24,.28);flex-shrink:0}
+.brand-name{font-size:20px;font-weight:750;letter-spacing:-.025em;line-height:1.1}
+.brand-date{font-size:12px;color:var(--color-text-secondary);margin-top:4px}
+.shift-pill{font-size:12px;font-weight:650;padding:7px 12px;border-radius:999px;background:var(--color-background-info);color:var(--color-text-info);white-space:nowrap}
+.nav{gap:6px;margin-bottom:1.35rem;padding:5px;background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.65);border-radius:16px;box-shadow:0 8px 24px rgba(32,49,67,.05);overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+@media(prefers-color-scheme:dark){.nav{background:rgba(32,40,48,.74);border-color:var(--color-border-tertiary)}}
+.nav::-webkit-scrollbar{display:none}
+.nav button{padding:8px 12px;border:0;border-radius:11px;white-space:nowrap;transition:background .18s ease,color .18s ease,transform .18s ease}
+.nav button:hover{background:var(--sunshine-pale);color:var(--color-text-primary)}
+.nav button.active{background:var(--sunshine);color:#1a202c;font-weight:700;box-shadow:0 5px 14px rgba(253,201,24,.24)}
+.card{border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.15rem 1.3rem;margin-bottom:14px;box-shadow:var(--shadow-soft);transition:box-shadow .2s ease,transform .2s ease}
+.card[onclick]:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.badge{font-weight:600;padding:3px 8px;border-radius:999px}
+input[type=text],input[type=number],select,textarea{padding:9px 11px;border:1px solid var(--color-border-secondary);font-family:inherit;outline:none;transition:border-color .18s ease,box-shadow .18s ease}
+input:focus,select:focus,textarea:focus{border-color:var(--sunshine);box-shadow:0 0 0 3px rgba(253,201,24,.22)}
+input[type=checkbox]{accent-color:var(--shelter-blue)}
+.btn{padding:8px 15px;border:1px solid var(--color-border-secondary);border-radius:12px;background:var(--color-background-primary);font-family:inherit;font-weight:600;transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:0 7px 16px rgba(32,49,67,.1)}
+.btn-primary{background:var(--sunshine);color:#1a202c;border-color:var(--sunshine)}
+.btn-sm{padding:5px 10px;border-radius:10px}
+.section-title{font-size:20px;font-weight:750;letter-spacing:-.02em}
+.field-row{padding:8px 0;border-bottom:1px solid var(--color-border-tertiary)}
+.shift-header{font-weight:750;letter-spacing:.075em;margin:1.55rem 0 8px;padding:8px 10px;border:0;border-radius:10px;background:var(--color-background-secondary)}
+.check-row{padding:9px 4px;border-bottom:1px solid var(--color-border-tertiary)}
+.rota-cell{width:30px;height:30px;border-radius:9px;border:1px solid var(--color-border-secondary)}
+.modal-overlay{background:rgba(22,31,40,.54);backdrop-filter:blur(4px)}
+.modal{border-radius:24px;padding:1.35rem;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.ai-output{background:linear-gradient(145deg,var(--sunshine-pale),var(--color-background-primary));border:1px solid var(--color-border-warning);border-radius:18px;padding:1.1rem 1.2rem;line-height:1.65;box-shadow:0 10px 26px rgba(122,90,0,.06)}
+@media(max-width:540px){.app{padding:.8rem .7rem 2rem}.app-header{padding:1rem;border-radius:20px}.brand-mark{width:40px;height:40px}.brand-name{font-size:18px}.nav{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible}.nav button{padding:8px 6px}.card{padding:1rem;border-radius:17px}.field-row{grid-template-columns:105px 1fr}}
 </style>
 </head>
 <body>
 <div class="app">
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
-  <div>
-    <div style="font-size:18px;font-weight:500">Kentavros Shelter</div>
-    <div style="font-size:12px;color:var(--color-text-secondary)" id="today-date"></div>
+<div class="app-header">
+  <div class="brand">
+    <div class="brand-mark"><i class="ti ti-paw"></i></div>
+    <div>
+      <div class="brand-name">Kentavros Shelter</div>
+      <div class="brand-date" id="today-date"></div>
+    </div>
   </div>
-  <div id="shift-indicator" style="font-size:12px;padding:4px 10px;border-radius:var(--border-radius-md);background:var(--color-background-info);color:var(--color-text-info)"></div>
+  <div id="shift-indicator" class="shift-pill"></div>
 </div>
 <div class="nav">
   <button class="active" onclick="showTab('shift')"><i class="ti ti-calendar"></i> Shift</button>
@@ -97,11 +158,13 @@ label{font-size:13px;color:var(--color-text-secondary);display:block;margin-bott
 <div id="tab-settings" class="tab-content"></div>
 </div>
 
+<datalist id="volunteer-suggestions"></datalist>
+
 <!-- Attribution modal -->
 <div id="attr-modal" class="modal-overlay" style="display:none">
   <div class="modal">
     <h3 id="attr-modal-title">Who did this?</h3>
-    <select id="attr-vol-select" style="margin-bottom:12px"></select>
+    <input type="text" id="attr-vol-input" list="volunteer-suggestions" placeholder="Type volunteer name" autocomplete="off" style="margin-bottom:12px">
     <div style="display:flex;gap:8px">
       <button class="btn btn-primary" style="flex:1" onclick="confirmAttribution()">Confirm</button>
       <button class="btn" onclick="cancelAttribution()">Cancel</button>
@@ -117,7 +180,8 @@ const C=56,G=6;
 const DEFAULT_SETTINGS={
   morningStart:'08:00',morningEnd:'11:00',
   eveningStart:'17:00',eveningEnd:'20:00',
-  cleanMins:75,walkMins:20,feedMins:20,specialMins:30
+  cleanMins:75,walkMins:20,feedMins:20,specialMins:30,
+  briefingApiUrl:''
 };
 
 // Storage
@@ -165,8 +229,9 @@ const DEFAULT_VOLUNTEERS=[
 {id:'v7',name:'Anna',offShifts:[]},{id:'v8',name:'Nicolas',offShifts:[]}
 ];
 
-let state={dogs:[],volunteers:[],shiftHistory:{},checkedTasks:{},taskAttribution:{},adHocTasks:{},shiftPlan:{},cleanHistory:{},specialAssignments:{},settings:{...DEFAULT_SETTINGS}};
+let state={dogs:[],volunteers:[],shiftHistory:{},checkedTasks:{},taskAttribution:{},adHocTasks:{},shiftPlan:{},cleanHistory:{},specialAssignments:{},aiBriefings:{},profileFlags:[],settings:{...DEFAULT_SETTINGS}};
 let currentDogId=null,showArchived=false;
+const briefingRequests=new Set();
 
 // Attribution modal state
 let attrCallback=null,attrKey=null;
@@ -182,7 +247,11 @@ function loadState(){
       state.taskAttribution=s.taskAttribution||{};
       state.adHocTasks=s.adHocTasks||{};state.shiftPlan=s.shiftPlan||{};
       state.cleanHistory=s.cleanHistory||{};state.specialAssignments=s.specialAssignments||{};
+      state.aiBriefings=s.aiBriefings||{};
+      state.profileFlags=s.profileFlags||[];
       state.settings={...DEFAULT_SETTINGS,...(s.settings||{})};
+      const sk=shiftKey();
+      if(state.shiftPlan[sk]&&state.shiftPlan[sk].capacityVersion!==2){state.shiftPlan[sk]=buildShiftPlan(getAvailableVols(currentShift()),currentShift());saveState();}
     }catch(e){state.dogs=DEFAULT_DOGS;state.volunteers=DEFAULT_VOLUNTEERS;}
   }else{state.dogs=DEFAULT_DOGS;state.volunteers=DEFAULT_VOLUNTEERS;}
   renderAll();
@@ -195,10 +264,35 @@ function todayDisplay(){return new Date().toLocaleDateString('en-GB',{weekday:'l
 function currentShift(){return new Date().getHours()<14?'Morning':'Evening';}
 function shiftKey(){return today()+'-'+currentShift();}
 function prevShiftKey(){const s=currentShift();if(s==='Evening')return today()+'-Morning';const p=new Date();p.setDate(p.getDate()-1);return p.toISOString().slice(0,10)+'-Evening';}
-function getAvailableVols(shift){const dn=todayDayName();return state.volunteers.filter(v=>!(v.offShifts||[]).find(o=>o.day===dn&&o.shift===shift));}
+function volunteerStays(v){return Array.isArray(v.stays)?v.stays.filter(s=>s&&s.start&&s.end):[];}
+function isVolunteerPresentOn(v,dateStr=today()){
+  const stays=volunteerStays(v);
+  return !stays.length||stays.some(s=>s.start<=dateStr&&dateStr<=s.end);
+}
+function volunteerStatus(v,dateStr=today()){
+  if(isVolunteerPresentOn(v,dateStr))return'active';
+  return volunteerStays(v).some(s=>s.start>dateStr)?'upcoming':'past';
+}
+function formatStayDate(dateStr){if(!dateStr)return'';const [y,m,d]=dateStr.split('-').map(Number);return new Date(y,m-1,d).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}
+function volunteerStaySummary(v){const stays=volunteerStays(v);if(!stays.length)return'No stay dates set · currently active';return stays.slice().sort((a,b)=>b.start.localeCompare(a.start)).map(s=>`${formatStayDate(s.start)} – ${formatStayDate(s.end)}`).join(' · ');}
+function getAvailableVols(shift,dateStr=today()){const d=new Date(dateStr+'T12:00:00'),dn=dayNameFromDate(d);return state.volunteers.filter(v=>isVolunteerPresentOn(v,dateStr)&&!(v.offShifts||[]).find(o=>o.day===dn&&o.shift===shift));}
 function daysSinceWalked(dog){const hist=(state.shiftHistory[dog.id]||[]).filter(h=>h.walked).sort((a,b)=>b.date.localeCompare(a.date));if(!hist.length)return 999;return Math.floor((new Date(today())-new Date(hist[0].date))/(1000*60*60*24));}
 function tagClass(t){if(['Biter','Caution'].includes(t))return'badge-danger';if(['Medication','Medical'].includes(t))return'badge-warning';if(['Needs 2 people','Carry out'].includes(t))return'badge-info';return'badge-success';}
 function ragDot(rag){return`<span class="rag-dot rag-${rag||'green'}"></span>`;}
+function escapeHtml(value){return String(value??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function noteCategory(note){return['medication','food','walk','general'].includes(note&&note.category)?note.category:'general';}
+function noteCategoryLabel(category){return({medication:'Medication',food:'Food',walk:'Walk',general:'General'})[category]||'General';}
+function noteCategoryClass(category){return category==='medication'?'badge-warning':category==='walk'?'badge-info':category==='food'?'badge-success':'';}
+function openProfileFlags(dogId){return(state.profileFlags||[]).filter(f=>f.dogId===dogId&&!f.dismissed);}
+function inlineNoteControls(dogId,category,placeholder){
+  const label=noteCategoryLabel(category);
+  return`<button class="btn btn-sm" style="margin-top:4px;font-size:11px" onclick="toggleInlineNote('${dogId}','${category}')"><i class="ti ti-pencil"></i> ${label} note</button>
+    <div id="inline-note-${category}-${dogId}" style="display:none" class="inline-note-form">
+      <textarea id="inline-note-text-${category}-${dogId}" placeholder="${placeholder}" rows="2" style="margin-bottom:6px;font-size:12px"></textarea>
+      <input type="text" id="inline-note-vol-${category}-${dogId}" list="volunteer-suggestions" placeholder="Volunteer name" autocomplete="off" style="margin-bottom:6px;font-size:12px">
+      <button class="btn btn-sm btn-primary" onclick="saveInlineNote('${dogId}','${category}')">Save ${label.toLowerCase()} note</button>
+    </div>`;
+}
 function volName(id){const v=state.volunteers.find(x=>x.id===id);return v?v.name:id;}
 function dogPhoto(d){if(d.photo)return`<div style="width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${d.photo}" style="width:100%;height:100%;object-fit:cover"></div>`;return`<div style="width:40px;height:40px;border-radius:50%;background:var(--color-background-info);display:flex;align-items:center;justify-content:center;font-weight:500;font-size:14px;color:var(--color-text-info);flex-shrink:0">${d.name[0]}</div>`;}
 function getWeekDates(){const now=new Date();const day=now.getDay();const mon=new Date(now);mon.setDate(now.getDate()-(day===0?6:day-1));return DAYS_WEEK.map((_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return d;});}
@@ -224,6 +318,12 @@ function calcCapacity(vols,cleanerIds,sk){
   return Math.floor(nonCleanerWalkMins/s.walkMins)*nonCleaners+Math.floor(cleanerWalkMins/s.walkMins)*cleaners;
 }
 
+function walkPeopleRequired(dog){
+  const tags=dog.tags||[];
+  const instructions=`${dog.walk&&dog.walk.harnessing||''} ${dog.notes||''}`;
+  return tags.includes('Needs 2 people')||/\b(?:needs|requires?)\s+(?:two|2)\s+people\b/i.test(instructions)?2:1;
+}
+
 function pickCleaners(vols){
   if(!vols.length)return[];if(vols.length===1)return[vols[0].id];
   const prev=state.cleanHistory[prevShiftKey()]||[];
@@ -241,16 +341,21 @@ function buildSpecialAssignments(allVolIds){
 
 function buildShiftPlan(vols,shift){
   const s=state.settings;
+  const sk=shiftKey();
   const cleanerIds=pickCleaners(vols);
   const cap=calcCapacity(vols,cleanerIds,sk);
-  const walkable=state.dogs.filter(d=>d.canWalk&&!d.adopted&&!d.archived).sort((a,b)=>daysSinceWalked(b)-daysSinceWalked(a)).slice(0,cap);
+  const prioritized=state.dogs.filter(d=>d.canWalk&&!d.adopted&&!d.archived).sort((a,b)=>daysSinceWalked(b)-daysSinceWalked(a));
+  const walkable=[];let remainingWalkSlots=cap;
+  prioritized.forEach(d=>{const slots=walkPeopleRequired(d);if(slots<=remainingWalkSlots){walkable.push(d);remainingWalkSlots-=slots;}});
   const feedDogs=state.dogs.filter(d=>!d.adopted&&!d.archived&&(shift==='Morning'||d.feedingShifts==='both'));
   const medDogs=state.dogs.filter(d=>!d.adopted&&!d.archived&&d.meds&&d.meds.what&&d.meds.what.trim());
   const nonWalkable=state.dogs.filter(d=>!d.canWalk&&!d.adopted&&!d.archived);
   const specialAssign=buildSpecialAssignments(vols.map(v=>v.id));
   return{
+    capacityVersion:2,
     cleaners:cleanerIds,nonCleaners:vols.filter(v=>!cleanerIds.includes(v.id)).map(v=>v.id),
-    walkDogs:walkable.map(d=>({id:d.id,name:d.name,harness:d.walk.harness,handling:d.walk.handling,tags:d.tags||[],daysSince:daysSinceWalked(d)})),
+    walkDogs:walkable.map(d=>({id:d.id,name:d.name,harness:d.walk.harness,handling:d.walk.handling,tags:d.tags||[],daysSince:daysSinceWalked(d),peopleRequired:walkPeopleRequired(d)})),
+    walkSlotsUsed:cap-remainingWalkSlots,walkSlotCapacity:cap,
     feedDogs:feedDogs.map(d=>({id:d.id,name:d.name,amount:d.food.amount,type:d.food.type,alone:d.food.alone,placement:d.food.placement,tags:d.tags||[]})),
     medDogs:medDogs.map(d=>({id:d.id,name:d.name,what:d.meds.what,how:d.meds.how})),
     cuddles:nonWalkable.map(d=>({id:d.id,name:d.name,task:(d.tags||[]).includes('Harness training')?'Harness training':'Cuddles & socialisation'})),
@@ -260,17 +365,18 @@ function buildShiftPlan(vols,shift){
 
 // Attribution modal
 function showAttrModal(title,key,onConfirm){
-  const vols=getAvailableVols(currentShift());
-  const sel=document.getElementById('attr-vol-select');
-  sel.innerHTML=vols.map(v=>`<option value="${v.id}">${v.name}</option>`).join('');
+  const input=document.getElementById('attr-vol-input');
+  input.value='';
   document.getElementById('attr-modal-title').textContent=title;
   document.getElementById('attr-modal').style.display='flex';
+  setTimeout(()=>input.focus(),0);
   attrCallback=onConfirm;attrKey=key;
 }
 function confirmAttribution(){
-  const volId=document.getElementById('attr-vol-select').value;
+  const volunteer=document.getElementById('attr-vol-input').value.trim();
+  if(!volunteer){document.getElementById('attr-vol-input').focus();return;}
   document.getElementById('attr-modal').style.display='none';
-  if(attrCallback)attrCallback(volId);
+  if(attrCallback)attrCallback(volunteer);
   attrCallback=null;attrKey=null;
 }
 function cancelAttribution(){
@@ -319,7 +425,7 @@ function renderShift(){
       <label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--color-text-secondary);margin:0;cursor:pointer">
         <input type="checkbox" id="adhoc-priority" style="width:14px;height:14px;margin:0"> Priority
       </label>
-      <select id="adhoc-assign" style="margin:0;flex:1;font-size:12px;min-width:120px"><option value="">Assign to (optional)</option>${getAvailableVols(currentShift()).map(v=>'<option value="'+v.id+'">'+v.name+'</option>').join('')}</select>
+      <input type="text" id="adhoc-assign" list="volunteer-suggestions" placeholder="Assign to (optional)" autocomplete="off" style="margin:0;flex:1;font-size:12px;min-width:120px">
     </div>
     <button class="btn btn-sm btn-primary" onclick="addAdHoc()">Add task</button>
   </div></div>`;
@@ -335,7 +441,7 @@ function renderShift(){
   }else{
     html+=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem">
       <button class="btn btn-sm" onclick="generatePlan()"><i class="ti ti-refresh"></i> Regenerate</button>
-      <button class="btn btn-sm btn-primary" onclick="generateAIBriefing()"><i class="ti ti-sparkles"></i> AI briefing</button>
+      <button class="btn btn-sm btn-primary" onclick="generateAIBriefing({force:true})"><i class="ti ti-sparkles"></i> Refresh briefing</button>
     </div>`;
 
     const nonCleanerNames=(plan.nonCleaners||[]).map(id=>volName(id)).join(', ')||'others';
@@ -357,6 +463,7 @@ function renderShift(){
           <div><span style="font-weight:500" class="${done?'done-text':''}">${m.name}</span><span style="font-size:13px"> — ${m.what}</span>
           <div style="font-size:12px;color:var(--color-text-secondary)">${m.how}</div>
           ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
+          ${inlineNoteControls(m.id,'medication','Note what was given, refused, changed or observed...')}
           </div></div>`;
       });
     }
@@ -370,12 +477,15 @@ function renderShift(){
         <span style="font-size:12px;color:var(--color-text-secondary)"> · ${d.amount}${d.type?' · '+d.type:''}</span>
         ${d.alone||d.placement?`<div style="font-size:12px;color:var(--color-text-secondary)">${[d.alone,d.placement].filter(Boolean).join(' · ')}</div>`:''}
         ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
+        ${inlineNoteControls(d.id,'food','Note appetite, food amount, feeding behaviour or changes...')}
         </div></div>`;
     });
 
     // WALKS
-    html+=`<div class="shift-header">Walks · ${plan.walkDogs.length} dogs · ${s.walkMins} mins each</div>`;
-    html+=`<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">${nonCleanerNames} walk from min ${s.feedMins}. ${plan.cleaners.map(id=>volName(id)).join(' + ')} join after min ${s.cleanMins}. Volunteers choose order.</div>`;
+    const walkSlotsUsed=plan.walkSlotsUsed??plan.walkDogs.reduce((sum,d)=>sum+(d.peopleRequired||((d.tags||[]).includes('Needs 2 people')?2:1)),0);
+    const walkSlotCapacity=plan.walkSlotCapacity??calcCapacity(vols,plan.cleaners,sk);
+    html+=`<div class="shift-header">Walks · ${plan.walkDogs.length} dogs · ${walkSlotsUsed}/${walkSlotCapacity} volunteer slots · ${s.walkMins} mins each</div>`;
+    html+=`<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:8px">${nonCleanerNames} walk from min ${s.feedMins}. ${plan.cleaners.map(id=>volName(id)).join(' + ')} join after min ${s.cleanMins}. Dogs marked “2 people” use two capacity slots.</div>`;
     plan.walkDogs.forEach(d=>{const key='walk-'+d.id;const done=checked[key];const attrib=getAttrib(sk,key);
       const warns=(d.tags||[]).filter(t=>['Caution','Needs 2 people','Carry out','Gentle walks only'].includes(t));
       const daysText=d.daysSince===0?'today':d.daysSince===1?'yesterday':`${d.daysSince}d ago`;
@@ -384,12 +494,7 @@ function renderShift(){
           <div class="${done?'done-text':''}"><span style="font-weight:500">${d.name}</span>${d.harness?`<span style="font-size:12px;color:var(--color-text-secondary)"> · ${d.harness}</span>`:''}${warns.map(w=>`<span class="badge ${tagClass(w)}">${w}</span>`).join('')}<span style="font-size:12px;color:var(--color-text-secondary)"> · ${daysText}</span></div>
           ${d.handling?`<div style="font-size:12px;color:var(--color-text-secondary)">${d.handling}</div>`:''}
           ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
-          <button class="btn btn-sm" style="margin-top:4px;font-size:11px" onclick="toggleInlineNote('${d.id}')"><i class="ti ti-pencil"></i> Note</button>
-          <div id="inline-note-${d.id}" style="display:none" class="inline-note-form">
-            <textarea id="inline-note-text-${d.id}" placeholder="Note about this walk..." rows="2" style="margin-bottom:6px;font-size:12px"></textarea>
-            <select id="inline-note-vol-${d.id}" style="margin-bottom:6px;font-size:12px">${getAvailableVols(currentShift()).map(v=>`<option value="${v.id}">${v.name}</option>`).join('')}</select>
-            <button class="btn btn-sm btn-primary" onclick="saveInlineNote('${d.id}')">Save note</button>
-          </div>
+          ${inlineNoteControls(d.id,'walk','Note behaviour, handling, mobility or route changes...')}
         </div>
       </div>`;
     });
@@ -416,9 +521,11 @@ function renderShift(){
         ${attrib?`<div class="attribution">✓ ${volName(attrib)}</div>`:''}
         </div></div>`;
     });
-    html+=`<div id="special-editor"></div><div id="ai-briefing-output" style="margin-top:1rem"></div>`;
+    const briefing=state.aiBriefings[sk];
+    html+=`<div id="special-editor"></div><div id="ai-briefing-output" style="margin-top:1rem">${briefingMarkup(briefing)}</div>`;
   }
   document.getElementById('tab-shift').innerHTML=html;
+  if(plan&&!state.aiBriefings[sk]&&!briefingRequests.has(sk))setTimeout(()=>generateAIBriefing(),0);
 }
 
 function tickTask(key,label){
@@ -476,23 +583,23 @@ function tickAdHoc(i){
   });
 }
 
-function toggleInlineNote(dogId){
-  const el=document.getElementById('inline-note-'+dogId);
+function toggleInlineNote(dogId,category){
+  const el=document.getElementById(`inline-note-${category}-${dogId}`);
   if(el)el.style.display=el.style.display==='none'?'block':'none';
 }
 
-function saveInlineNote(dogId){
-  const text=document.getElementById('inline-note-text-'+dogId).value.trim();
-  const volId=document.getElementById('inline-note-vol-'+dogId).value;
+function saveInlineNote(dogId,category){
+  const text=document.getElementById(`inline-note-text-${category}-${dogId}`).value.trim();
+  const volId=document.getElementById(`inline-note-vol-${category}-${dogId}`).value.trim();
   if(!text)return;
   const d=state.dogs.find(x=>x.id===dogId);if(!d)return;
   if(!d.dogNotes)d.dogNotes=[];
-  d.dogNotes.unshift({date:today(),shift:currentShift(),volunteer:volName(volId),text});
+  d.dogNotes.unshift({date:today(),shift:currentShift(),volunteer:volName(volId)||'Volunteer',category,text});
   saveState();
-  document.getElementById('inline-note-'+dogId).style.display='none';
+  document.getElementById(`inline-note-${category}-${dogId}`).style.display='none';
   // show confirmation briefly
-  const btn=document.querySelector(`button[onclick="toggleInlineNote('${dogId}')"]`);
-  if(btn){const orig=btn.innerHTML;btn.innerHTML='✓ Saved';setTimeout(()=>{btn.innerHTML=orig;},1500);}
+  const btn=document.querySelector(`button[onclick="toggleInlineNote('${dogId}','${category}')"]`);
+  if(btn){const orig=btn.innerHTML;btn.innerHTML='✓ Saved to profile';setTimeout(()=>{btn.innerHTML=orig;},1500);}
 }
 
 function addAdHoc(){
@@ -522,6 +629,8 @@ function generatePlan(){
   const shift=currentShift(),vols=getAvailableVols(shift),sk=shiftKey();
   const plan=buildShiftPlan(vols,shift);
   state.shiftPlan[sk]=plan;state.cleanHistory[sk]=plan.cleaners;
+  delete state.aiBriefings[sk];
+  briefingRequests.delete(sk);
   saveState();renderShift();
 }
 
@@ -541,17 +650,56 @@ function showSpecialEditor(){
 }
 function updateSpecialAssign(vid,idx,dogId){const wk=weekKey();if(!state.specialAssignments[wk])state.specialAssignments[wk]={};if(!state.specialAssignments[wk][vid])state.specialAssignments[wk][vid]=[];state.specialAssignments[wk][vid][idx]=dogId;saveState();}
 
-async function generateAIBriefing(){
-  const el=document.getElementById('ai-briefing-output');if(!el)return;
-  el.innerHTML='<div style="font-size:13px;color:var(--color-text-secondary)">Generating...</div>';
-  const shift=currentShift(),vols=getAvailableVols(shift),plan=state.shiftPlan[shiftKey()],s=state.settings;
+function briefingMarkup(briefing){
+  if(!briefing)return'<div style="font-size:13px;color:var(--color-text-secondary)"><i class="ti ti-sparkles"></i> AI briefing will generate automatically.</div>';
+  const paragraphs=escapeHtml(briefing.text).split(/\n{2,}/).map(p=>`<p style="margin-bottom:8px">${p.replace(/\n/g,'<br>')}</p>`).join('');
+  const flags=briefing.profileFlags||[];
+  const review=flags.length?`<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--color-border-warning)"><strong><i class="ti ti-alert-triangle"></i> ${flags.length} profile review suggestion${flags.length===1?'':'s'}</strong><div style="font-size:12px;color:var(--color-text-secondary);margin-top:3px">Open the highlighted dog profiles to review them.</div></div>`:'';
+  return`<div class="ai-output"><div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:6px"><i class="ti ti-sparkles"></i> AI shift briefing · generated ${escapeHtml(briefing.generatedAtLabel)}</div>${paragraphs}${review}</div>`;
+}
+
+function briefingPayload(shift,vols,plan,s){
   const times=shift==='Morning'?`${s.morningStart}–${s.morningEnd}`:`${s.eveningStart}–${s.eveningEnd}`;
-  const prompt=`Write a short, warm, practical shift briefing for Kentavros dog rescue shelter volunteers in Greece.\nShift: ${shift} (${times}), ${todayDisplay()}\nVolunteers: ${vols.map(v=>v.name).join(', ')||'None'}\nCleaners (${s.cleanMins} mins): ${plan?plan.cleaners.map(id=>volName(id)).join(' + '):'TBC'}\nNon-cleaners feed + medicate first ${s.feedMins} mins, then walk\nDogs to walk: ${plan?plan.walkDogs.length:0}\nMedications: ${plan&&plan.medDogs.length?plan.medDogs.map(d=>d.name+': '+d.what).join('; '):'None'}\nKey reminders: Fenya needs 2 people to harness. Theodora must be carried out of kennel. Arion must always exit through Bob/Billy enclosure. Spotty has bitten volunteers - feed through fence first.\n2-3 short paragraphs, practical and encouraging.`;
+  const assigned=state.specialAssignments[weekKey()]||plan.specialAssign||{};
+  return{
+    shelter:'Kentavros dog rescue shelter',date:todayDisplay(),shift,times,
+    volunteers:vols.map(v=>v.name),cleaners:plan.cleaners.map(id=>volName(id)),
+    feedMinutes:s.feedMins,cleanMinutes:s.cleanMins,specialMinutes:s.specialMins,
+    dogsToWalk:plan.walkDogs.map(d=>({name:d.name,handling:d.handling,tags:d.tags,daysSinceWalk:d.daysSince,peopleRequired:d.peopleRequired||((d.tags||[]).includes('Needs 2 people')?2:1)})),
+    medications:plan.medDogs.map(d=>({name:d.name,medication:d.what,instructions:d.how})),
+    feeding:plan.feedDogs.map(d=>({name:d.name,amount:d.amount,type:d.type,notes:[d.alone,d.placement].filter(Boolean).join(' · '),tags:d.tags})),
+    specialDogs:Object.entries(assigned).map(([volunteerId,dogIds])=>({volunteer:volName(volunteerId),dogs:(dogIds||[]).map(id=>{const d=state.dogs.find(x=>x.id===id);return d?{name:d.name,status:d.rag,reason:d.ragReason}:null;}).filter(Boolean)})),
+    adHocTasks:(state.adHocTasks[shiftKey()]||[]).map(t=>({text:t.text,minutes:t.mins||0,people:t.people||1,priority:!!t.priority,assigned:t.assigned?volName(t.assigned):''})),
+    dogProfiles:state.dogs.filter(d=>!d.archived&&!d.adopted&&(d.dogNotes||[]).length).map(d=>({
+      id:d.id,name:d.name,
+      profile:{feedingSchedule:d.feedingShifts,food:d.food,medication:d.meds,walk:d.walk,behaviourWithPeople:d.withPeople,behaviourWithDogs:d.withDogs,status:d.rag,statusReason:d.ragReason,generalNotes:d.notes,tags:d.tags||[]},
+      recentVolunteerNotes:(d.dogNotes||[]).slice(0,12).map(n=>({date:n.date,shift:n.shift||'',volunteer:n.volunteer||'Volunteer',category:noteCategory(n),text:n.text}))
+    }))
+  };
+}
+
+async function generateAIBriefing({force=false}={}){
+  const el=document.getElementById('ai-briefing-output');if(!el)return;
+  const shift=currentShift(),vols=getAvailableVols(shift),sk=shiftKey(),plan=state.shiftPlan[sk],s=state.settings;
+  if(!plan||(!force&&state.aiBriefings[sk])||briefingRequests.has(sk))return;
+  const apiUrl=(s.briefingApiUrl||'').trim();
+  if(!apiUrl){el.innerHTML='<div class="card" style="font-size:13px;background:var(--color-background-warning);color:var(--color-text-warning)"><strong>AI briefing setup needed.</strong> Add the secure briefing API URL in Settings. Once connected, one briefing will generate automatically for every shift plan.</div>';return;}
+  briefingRequests.add(sk);
+  el.innerHTML='<div style="font-size:13px;color:var(--color-text-secondary)"><i class="ti ti-loader"></i> Generating this shift’s AI briefing…</div>';
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:prompt}]})});
+    const r=await fetch(apiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(briefingPayload(shift,vols,plan,s))});
     const data=await r.json();
-    el.innerHTML=`<div class="ai-output">${data.content&&data.content[0]?data.content[0].text:'Could not generate.'}</div>`;
-  }catch(e){el.innerHTML=`<div style="color:var(--color-text-danger);font-size:13px">AI briefing requires a server environment.</div>`;}
+    if(!r.ok||!data.briefing)throw new Error(data.error||`Briefing service returned ${r.status}`);
+    const dogIds=new Set(state.dogs.map(d=>d.id));
+    const profileFlags=(Array.isArray(data.profileFlags)?data.profileFlags:[])
+      .filter(f=>f&&dogIds.has(f.dogId)&&['medication','food','walk','general'].includes(f.category))
+      .map((f,i)=>({...f,id:`${sk}-${f.dogId}-${f.category}-${i}`,shiftKey:sk,dismissed:false}));
+    state.profileFlags=(state.profileFlags||[]).filter(f=>f.shiftKey!==sk).concat(profileFlags);
+    state.aiBriefings[sk]={text:data.briefing,profileFlags,generatedAt:new Date().toISOString(),generatedAtLabel:new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})};
+    saveState();
+    el.innerHTML=briefingMarkup(state.aiBriefings[sk]);
+  }catch(e){el.innerHTML=`<div class="card" style="font-size:13px;background:var(--color-background-danger);color:var(--color-text-danger)"><strong>Briefing could not be generated.</strong> ${escapeHtml(e.message||'Check the briefing API in Settings.')} <button class="btn btn-sm" style="margin-left:6px" onclick="generateAIBriefing({force:true})">Try again</button></div>`;
+  }finally{briefingRequests.delete(sk);}
 }
 
 // MAP
@@ -600,14 +748,16 @@ function renderDogs(){
   document.getElementById('tab-dogs').innerHTML=html;
 }
 function toggleArchiveView(){showArchived=!showArchived;renderDogs();}
-function dogCard(d){return`<div class="card" style="cursor:pointer;padding:10px 1rem" onclick="viewDog('${d.id}')"><div style="display:flex;align-items:center;gap:10px">${dogPhoto(d)}<div style="flex:1"><div style="display:flex;align-items:center;gap:4px">${ragDot(d.rag)}<span style="font-weight:500">${d.name}</span><span style="font-size:12px;color:var(--color-text-secondary)">${d.gender}</span>${d.adopted?' <span class="badge badge-info">Adopted</span>':''}${!d.canWalk?' <span class="badge badge-warning">No walks</span>':''}</div>${d.ragReason?`<div style="font-size:11px;color:var(--color-text-secondary);margin-top:1px">${d.ragReason}</div>`:''}<div>${(d.tags||[]).map(t=>`<span class="badge ${tagClass(t)}">${t}</span>`).join('')}</div></div><i class="ti ti-chevron-right" style="color:var(--color-text-secondary)"></i></div></div>`;}
+function dogCard(d){const reviewCount=openProfileFlags(d.id).length;return`<div class="card" style="cursor:pointer;padding:10px 1rem" onclick="viewDog('${d.id}')"><div style="display:flex;align-items:center;gap:10px">${dogPhoto(d)}<div style="flex:1"><div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">${ragDot(d.rag)}<span style="font-weight:500">${d.name}</span><span style="font-size:12px;color:var(--color-text-secondary)">${d.gender}</span>${d.adopted?' <span class="badge badge-info">Adopted</span>':''}${!d.canWalk?' <span class="badge badge-warning">No walks</span>':''}${reviewCount?`<span class="badge badge-warning"><i class="ti ti-alert-triangle"></i> Profile review ${reviewCount}</span>`:''}</div>${d.ragReason?`<div style="font-size:11px;color:var(--color-text-secondary);margin-top:1px">${d.ragReason}</div>`:''}<div>${(d.tags||[]).map(t=>`<span class="badge ${tagClass(t)}">${t}</span>`).join('')}</div></div><i class="ti ti-chevron-right" style="color:var(--color-text-secondary)"></i></div></div>`;}
 function filterDogs(q){document.getElementById('dog-list').innerHTML=state.dogs.filter(d=>!d.archived&&(d.name.toLowerCase().includes(q.toLowerCase())||(d.tags||[]).some(t=>t.toLowerCase().includes(q.toLowerCase())))).map(d=>dogCard(d)).join('');}
 function viewDog(id){currentDogId=id;renderDogProfile(id);}
 function renderDogProfile(id){
   const d=state.dogs.find(x=>x.id===id);if(!d)return;
   const days=daysSinceWalked(d);
-  let html=`<button class="back-btn" onclick="currentDogId=null;renderDogs()"><i class="ti ti-arrow-left"></i> All dogs</button>
-  <div class="card"><div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:1rem"><div style="position:relative">${dogPhoto(d)}<button class="btn btn-sm" onclick="uploadPhoto('${d.id}')" style="position:absolute;bottom:-8px;right:-8px;padding:2px 4px;font-size:10px"><i class="ti ti-camera"></i></button><input type="file" id="photo-input-${d.id}" accept="image/*" style="display:none" onchange="handlePhoto('${d.id}',this)"></div>
+  const flags=openProfileFlags(id);
+  let html=`<button class="back-btn" onclick="currentDogId=null;renderDogs()"><i class="ti ti-arrow-left"></i> All dogs</button>`;
+  if(flags.length){html+=`<div class="card" style="background:var(--color-background-warning);border-color:var(--color-border-warning)"><div style="font-weight:700;color:var(--color-text-warning);margin-bottom:8px"><i class="ti ti-alert-triangle"></i> Profile update suggested</div>${flags.map(f=>`<div style="padding:9px 0;border-top:1px solid var(--color-border-warning)"><div><span class="badge ${noteCategoryClass(f.category)}">${noteCategoryLabel(f.category)}</span> <strong>${escapeHtml(f.reason)}</strong></div><div style="font-size:13px;margin-top:5px">Suggested change: ${escapeHtml(f.suggestedUpdate)}</div>${(f.evidence||[]).length?`<div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">Evidence: ${(f.evidence||[]).map(escapeHtml).join(' · ')}</div>`:''}<button class="btn btn-sm" style="margin-top:7px" onclick="dismissProfileFlag('${f.id}','${d.id}')">Dismiss suggestion</button></div>`).join('')}</div>`;}
+  html+=`<div class="card"><div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:1rem"><div style="position:relative">${dogPhoto(d)}<button class="btn btn-sm" onclick="uploadPhoto('${d.id}')" style="position:absolute;bottom:-8px;right:-8px;padding:2px 4px;font-size:10px"><i class="ti ti-camera"></i></button><input type="file" id="photo-input-${d.id}" accept="image/*" style="display:none" onchange="handlePhoto('${d.id}',this)"></div>
   <div style="flex:1"><div style="font-size:17px;font-weight:500;display:flex;align-items:center;gap:6px">${ragDot(d.rag)}${d.name} <span style="font-size:13px;color:var(--color-text-secondary)">${d.gender==='F'?'Female':'Male'}</span></div>
   <div style="margin-top:4px">${(d.tags||[]).map(t=>`<span class="badge ${tagClass(t)}">${t}</span>`).join('')}</div>
   ${d.canWalk&&days<999?`<div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">Last walked: ${days===0?'today':days===1?'yesterday':days+' days ago'}</div>`:''}
@@ -626,15 +776,17 @@ function renderDogProfile(id){
   <label>Enclosure</label><select onchange="setEnclosure('${d.id}',this.value)"><option value="">Unassigned</option>${['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21'].map(n=>`<option value="${n}" ${d.enclosure==n?'selected':''}>${n}</option>`).join('')}</select>`;
   if(d.notes)html+=`<div style="margin-top:10px;padding:10px;background:var(--color-background-warning);border-radius:var(--border-radius-md);font-size:13px;color:var(--color-text-warning)">${d.notes}</div>`;
   html+=`</div><div class="card"><div style="font-weight:500;margin-bottom:10px">Volunteer notes</div>`;
-  (d.dogNotes||[]).forEach(n=>{html+=`<div class="note-item"><div class="note-date">${n.date}${n.shift?' · '+n.shift:''} · ${n.volunteer||'Volunteer'}</div>${n.text}</div>`;});
-  html+=`<textarea id="note-text" placeholder="Add a note..." rows="2" style="margin-top:8px"></textarea>
-  <select id="note-vol" style="margin-bottom:8px"><option value="">Select volunteer...</option>${state.volunteers.map(v=>`<option value="${v.name}">${v.name}</option>`).join('')}</select>
+  (d.dogNotes||[]).forEach(n=>{const category=noteCategory(n);html+=`<div class="note-item"><div class="note-date"><span class="badge ${noteCategoryClass(category)}" style="margin-left:0">${noteCategoryLabel(category)}</span> ${n.date}${n.shift?' · '+n.shift:''} · ${n.volunteer||'Volunteer'}</div>${escapeHtml(n.text)}</div>`;});
+  html+=`<label style="margin-top:8px">Note type</label><select id="note-category"><option value="general">General</option><option value="medication">Medication</option><option value="food">Food</option><option value="walk">Walk</option></select>
+  <textarea id="note-text" placeholder="Add a note..." rows="2"></textarea>
+  <input type="text" id="note-vol" list="volunteer-suggestions" placeholder="Volunteer name" autocomplete="off" style="margin-bottom:8px">
   <button class="btn btn-sm btn-primary" onclick="addNote('${d.id}')">Add note</button></div>`;
   document.getElementById('tab-dogs').innerHTML=html;
 }
 function uploadPhoto(id){document.getElementById('photo-input-'+id).click();}
 function handlePhoto(id,input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{const d=state.dogs.find(x=>x.id===id);d.photo=e.target.result;saveState();renderDogProfile(id);};reader.readAsDataURL(file);}
-function addNote(dogId){const text=document.getElementById('note-text').value.trim(),vol=document.getElementById('note-vol').value;if(!text)return;const d=state.dogs.find(x=>x.id===dogId);if(!d.dogNotes)d.dogNotes=[];d.dogNotes.unshift({date:today(),shift:currentShift(),volunteer:vol||'Volunteer',text});saveState();renderDogProfile(dogId);}
+function addNote(dogId){const text=document.getElementById('note-text').value.trim(),vol=document.getElementById('note-vol').value.trim(),category=document.getElementById('note-category').value;if(!text)return;const d=state.dogs.find(x=>x.id===dogId);if(!d.dogNotes)d.dogNotes=[];d.dogNotes.unshift({date:today(),shift:currentShift(),volunteer:vol||'Volunteer',category,text});saveState();renderDogProfile(dogId);}
+function dismissProfileFlag(flagId,dogId){const flag=(state.profileFlags||[]).find(f=>f.id===flagId);if(flag)flag.dismissed=true;saveState();renderDogProfile(dogId);}
 function toggleAdopted(id){const d=state.dogs.find(x=>x.id===id);d.adopted=!d.adopted;saveState();renderDogProfile(id);}
 function toggleCanWalk(id){const d=state.dogs.find(x=>x.id===id);d.canWalk=!d.canWalk;saveState();renderDogProfile(id);}
 function archiveDog(id){if(!confirm('Archive this dog?'))return;const d=state.dogs.find(x=>x.id===id);d.archived=true;currentDogId=null;saveState();renderDogs();}
@@ -671,24 +823,33 @@ function addDog(){const name=document.getElementById('new-name').value.trim();if
 
 // VOLUNTEERS
 function renderVolunteers(){
-  let html=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem"><div class="section-title" style="margin:0">Volunteers (${state.volunteers.length})</div><button class="btn btn-sm btn-primary" onclick="showAddVol()">+ Add</button></div><div id="vol-list">`;
-  state.volunteers.forEach(v=>{html+=`<div class="card"><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-weight:500">${v.name}</span><button class="btn btn-sm btn-danger" onclick="removeVol('${v.id}')">Remove</button></div></div>`;});
+  const groups={active:[],upcoming:[],past:[]};state.volunteers.forEach(v=>groups[volunteerStatus(v)].push(v));
+  let html=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem"><div class="section-title" style="margin:0">Volunteers</div><button class="btn btn-sm btn-primary" onclick="showAddVol()">+ Add volunteer</button></div><div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">Stay dates control who appears in shift plans. Past volunteers and all of their records are kept.</div><div id="vol-list">`;
+  [['active','Currently here'],['upcoming','Arriving soon'],['past','Past volunteers']].forEach(([status,label])=>{
+    html+=`<div class="shift-header">${label} · ${groups[status].length}</div>`;
+    if(!groups[status].length)html+=`<div style="font-size:12px;color:var(--color-text-secondary);padding:4px 2px 12px">None</div>`;
+    groups[status].sort((a,b)=>a.name.localeCompare(b.name)).forEach(v=>{html+=`<div class="card"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px"><div><div style="font-weight:650">${escapeHtml(v.name)}</div><div style="font-size:12px;color:var(--color-text-secondary);margin-top:3px">${escapeHtml(volunteerStaySummary(v))}</div></div><div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end">${status==='past'?`<button class="btn btn-sm btn-primary" onclick="showStayEditor('${v.id}','return')">Returning volunteer</button>`:`<button class="btn btn-sm" onclick="showStayEditor('${v.id}','edit')">Edit</button>`}${status==='active'&&volunteerStays(v).length?`<button class="btn btn-sm" onclick="endVolunteerStay('${v.id}')">Finish today</button>`:''}</div></div><div id="stay-editor-${v.id}"></div></div>`;});
+  });
   html+=`</div><div id="add-vol-form"></div>`;document.getElementById('tab-volunteers').innerHTML=html;
 }
-function showAddVol(){document.getElementById('add-vol-form').innerHTML=`<div class="card"><div style="font-weight:500;margin-bottom:8px">Add volunteer</div><input type="text" id="new-vol-name" placeholder="Name"><button class="btn btn-sm btn-primary" onclick="addVol()">Add</button></div>`;}
-function addVol(){const name=document.getElementById('new-vol-name').value.trim();if(!name)return;state.volunteers.push({id:'vol-'+Date.now(),name,offShifts:[]});saveState();renderVolunteers();}
-function removeVol(id){state.volunteers=state.volunteers.filter(v=>v.id!==id);saveState();renderVolunteers();}
+function showAddVol(){document.getElementById('add-vol-form').innerHTML=`<div class="card"><div style="font-weight:650;margin-bottom:8px">Add volunteer stay</div><label>Name</label><input type="text" id="new-vol-name" placeholder="Volunteer name"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><label>Arrival</label><input type="date" id="new-vol-start" value="${today()}"></div><div><label>Departure</label><input type="date" id="new-vol-end"></div></div><div id="new-vol-error" style="font-size:12px;color:var(--color-text-danger);margin-bottom:7px"></div><button class="btn btn-sm btn-primary" onclick="addVol()">Add volunteer</button></div>`;}
+function addVol(){const name=document.getElementById('new-vol-name').value.trim(),start=document.getElementById('new-vol-start').value,end=document.getElementById('new-vol-end').value,error=document.getElementById('new-vol-error');if(!name||!start||!end||end<start){error.textContent='Enter a name and valid arrival and departure dates.';return;}state.volunteers.push({id:'vol-'+Date.now(),name,offShifts:[],stays:[{start,end}]});volunteerChangeSaved();}
+function showStayEditor(id,mode){const v=state.volunteers.find(x=>x.id===id),el=document.getElementById('stay-editor-'+id);if(!v||!el)return;const stays=volunteerStays(v).slice().sort((a,b)=>b.start.localeCompare(a.start));const current=mode==='edit'?(stays.find(s=>s.start<=today()&&today()<=s.end)||stays.find(s=>s.start>today())||stays[0]):null;el.innerHTML=`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--color-border-tertiary)"><label>Name</label><input type="text" id="edit-vol-name-${id}" value="${escapeHtml(v.name)}"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><label>Arrival</label><input type="date" id="edit-vol-start-${id}" value="${current?current.start:today()}"></div><div><label>Departure</label><input type="date" id="edit-vol-end-${id}" value="${current?current.end:''}"></div></div><div id="edit-vol-error-${id}" style="font-size:12px;color:var(--color-text-danger);margin-bottom:7px"></div><button class="btn btn-sm btn-primary" onclick="saveVolunteerStay('${id}','${mode}',${current?`'${current.start}'`:'null'})">${mode==='return'?'Add return stay':'Save changes'}</button></div>`;}
+function saveVolunteerStay(id,mode,originalStart){const v=state.volunteers.find(x=>x.id===id),name=document.getElementById('edit-vol-name-'+id).value.trim(),start=document.getElementById('edit-vol-start-'+id).value,end=document.getElementById('edit-vol-end-'+id).value,error=document.getElementById('edit-vol-error-'+id);if(!v||!name||!start||!end||end<start){error.textContent='Enter a name and valid arrival and departure dates.';return;}v.name=name;if(!Array.isArray(v.stays))v.stays=[];if(mode==='edit'&&originalStart){const idx=v.stays.findIndex(s=>s.start===originalStart);if(idx>=0)v.stays[idx]={start,end};else v.stays.push({start,end});}else v.stays.push({start,end});volunteerChangeSaved();}
+function endVolunteerStay(id){const v=state.volunteers.find(x=>x.id===id);if(!v)return;const active=volunteerStays(v).find(s=>s.start<=today()&&today()<=s.end);if(active)active.end=today();volunteerChangeSaved();}
+function volunteerChangeSaved(){const sk=shiftKey();delete state.shiftPlan[sk];delete state.aiBriefings[sk];state.profileFlags=(state.profileFlags||[]).filter(f=>f.shiftKey!==sk);saveState();renderVolunteerSuggestions();renderVolunteers();}
 
 // ROTA
 function renderRota(){
   const dates=getWeekDates(),todayStr=todayDayName();
-  let html=`<div class="section-title">Rota</div><div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">Tap any cell to toggle. Green = available, red = off.</div><div style="overflow-x:auto"><table style="border-collapse:separate;border-spacing:4px"><thead><tr><th style="min-width:72px"></th>`;
+  const weekVolunteers=state.volunteers.filter(v=>dates.some(d=>isVolunteerPresentOn(v,d.toISOString().slice(0,10))));
+  let html=`<div class="section-title">Rota</div><div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem">Only volunteers whose stay covers this week are shown. Tap any active cell to toggle availability.</div><div style="overflow-x:auto"><table style="border-collapse:separate;border-spacing:4px"><thead><tr><th style="min-width:72px"></th>`;
   dates.forEach(d=>{const t=isToday(d);html+=`<th colspan="2" style="text-align:center;padding:2px 4px"><div style="font-size:11px;font-weight:${t?'500':'400'};color:var(--color-text-${t?'primary':'secondary'})">${d.toLocaleDateString('en-GB',{weekday:'short'})}</div><div style="font-size:10px;color:var(--color-text-${t?'info':'secondary'});font-weight:${t?'500':'400'}">${d.getDate()}/${d.getMonth()+1}</div></th>`;});
   html+=`</tr><tr><th></th>`;dates.forEach(()=>SHIFTS.forEach(s=>{html+=`<th style="text-align:center;font-size:10px;color:var(--color-text-secondary);font-weight:400;padding:0 2px">${s[0]}</th>`;}));
   html+=`</tr></thead><tbody>`;
-  state.volunteers.forEach(v=>{
+  weekVolunteers.forEach(v=>{
     html+=`<tr><td style="font-size:13px;font-weight:500;padding:2px 6px;white-space:nowrap">${v.name}</td>`;
-    dates.forEach(d=>{const dn=dayNameFromDate(d);const past=isPast(d);SHIFTS.forEach(shift=>{const off=(v.offShifts||[]).find(o=>o.day===dn&&o.shift===shift);html+=`<td style="padding:1px"><div class="rota-cell ${off?'rota-off':'rota-on'}" style="${past?'opacity:0.4;cursor:default':''}" ${past?'':'onclick="toggleRota(\''+v.id+'\',\''+dn+'\',\''+shift+'\')"'}>${off?'✕':'✓'}</div></td>`;});});
+    dates.forEach(d=>{const dateStr=d.toISOString().slice(0,10),dn=dayNameFromDate(d),past=isPast(d),present=isVolunteerPresentOn(v,dateStr);SHIFTS.forEach(shift=>{const off=(v.offShifts||[]).find(o=>o.day===dn&&o.shift===shift),disabled=past||!present;html+=`<td style="padding:1px"><div class="rota-cell ${present?(off?'rota-off':'rota-on'):''}" style="${disabled?'opacity:0.3;cursor:default':''}" ${disabled?'':'onclick="toggleRota(\''+v.id+'\',\''+dn+'\',\''+shift+'\')"'}>${present?(off?'✕':'✓'):'–'}</div></td>`;});});
     html+=`</tr>`;
   });
   html+=`</tbody></table></div>`;
@@ -714,6 +875,11 @@ function renderSettings(){
     <label>Walk per dog</label><input type="number" id="s-walk" value="${s.walkMins}" min="10" max="60">
     <label>Special dogs</label><input type="number" id="s-special" value="${s.specialMins}" min="10" max="60">
     <div id="capacity-preview" style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;margin-bottom:12px"></div>
+    <button class="btn btn-primary" onclick="saveSettings()">Save</button>
+  </div>
+  <div class="card"><div style="font-weight:500;margin-bottom:6px">Automatic AI briefing</div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:10px">A briefing is generated once when each shift plan is created. The secure worker keeps the Anthropic API key out of this public website.</div>
+    <label>Briefing API URL</label><input type="text" id="s-briefing-api" value="${escapeHtml(s.briefingApiUrl||'')}" placeholder="https://your-worker.workers.dev">
     <button class="btn btn-primary" onclick="saveSettings()">Save</button>
   </div>
   <div class="card"><div style="font-weight:500;margin-bottom:6px">Shift breakdown</div>
@@ -747,7 +913,8 @@ function saveSettings(){
     cleanMins:parseInt(document.getElementById('s-clean').value)||75,
     feedMins:parseInt(document.getElementById('s-feed').value)||20,
     walkMins:parseInt(document.getElementById('s-walk').value)||20,
-    specialMins:parseInt(document.getElementById('s-special').value)||30
+    specialMins:parseInt(document.getElementById('s-special').value)||30,
+    briefingApiUrl:document.getElementById('s-briefing-api').value.trim()
   };
   saveState();renderAll();renderSettings();
 }
@@ -759,7 +926,8 @@ function showTab(tab){
   document.querySelectorAll('.nav button')[['shift','dogs','volunteers','map','rota','settings'].indexOf(tab)].classList.add('active');
   if(tab==='shift')renderShift();else if(tab==='dogs'){currentDogId=null;renderDogs();}else if(tab==='volunteers')renderVolunteers();else if(tab==='map')renderMap();else if(tab==='rota')renderRota();else if(tab==='settings')renderSettings();
 }
-function renderAll(){document.getElementById('today-date').textContent=todayDisplay();document.getElementById('shift-indicator').textContent=currentShift()+' shift';renderShift();}
+function renderVolunteerSuggestions(){const el=document.getElementById('volunteer-suggestions');if(el)el.innerHTML=state.volunteers.filter(v=>isVolunteerPresentOn(v)).map(v=>`<option value="${escapeHtml(v.name)}"></option>`).join('');}
+function renderAll(){document.getElementById('today-date').textContent=todayDisplay();document.getElementById('shift-indicator').textContent=currentShift()+' shift';renderVolunteerSuggestions();renderShift();}
 loadState();
 </script>
 </body>

@@ -1,0 +1,8 @@
+name = "kentavros-briefing-api"
+main = "worker/src/index.js"
+compatibility_date = "2026-09-26"
+
+[vars]
+ALLOWED_ORIGIN = "https://ashjstevens.github.io"
+# ANTHROPIC_MODEL can be changed here later if the configured model is retired.
+ANTHROPIC_MODEL = "claude-sonnet-5"
